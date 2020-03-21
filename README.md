@@ -4,4 +4,6 @@ The goal of this application is to simplify and motivate student to attend diffe
 
 ## Vision and scope
 
+https://docs.google.com/document/d/1sx9CIXqmazuGCZG2q-4uVvAOOtA3drXiDDFVlTUAnn0/edit#heading=h.tbjjsiwspwdm
+
 ...
