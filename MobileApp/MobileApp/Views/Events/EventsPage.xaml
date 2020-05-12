@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="MobileApp.Views.Events.EventsPage">
+    <ContentPage.Content>
+        <StackLayout>
+            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand " Padding="10">
+                <Entry Placeholder="Search" HorizontalOptions="FillAndExpand" />
+                <Picker x:Name="SortPicker"
+                        Title="Sort by"
+                        HorizontalOptions="End">  <!--ItemsSource="{Binding SortList}"-->
+                    <Picker.ItemsSource>
+                        <x:Array Type="{x:Type x:String}">
+                            <x:String>Name</x:String>
+                            <x:String>Date</x:String>
+                        </x:Array>
+                    </Picker.ItemsSource>
+                </Picker>
+            </StackLayout>
+            <ListView x:Name="EventsListView"
+                      ItemsSource="{Binding Events}"
+                      VerticalOptions="FillAndExpand"
+                      HasUnevenRows="true">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Frame Margin="15, 10, 15, 10" Padding="0" CornerRadius="15" BackgroundColor="LightBlue">
+                                <StackLayout Padding="10" Orientation="Vertical">
+                                    <Label Text="{Binding Title}" Style="{StaticResource LWhite}" />
+                                    
+                                    <Grid HeightRequest="300" BackgroundColor="White">
+                                        <Label HorizontalOptions="Center" VerticalOptions="Center" Text="There will be image" />
+                                    </Grid>
+
+                                    <StackLayout Orientation="Horizontal">
+                                        <Label Text="{Binding StartTime, StringFormat='{0:dd MMMM, yyyy}'}"/>
+                                        <Label Text="{Binding EndTime, StringFormat='{0:dd MMMM, yyyy}'}"/>
+                                    </StackLayout>
+                                </StackLayout>
+                            </Frame>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
