@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:controls="clr-namespace:XamForms.Controls;assembly=XamForms.Controls.Calendar" 
+             xmlns:local="clr-namespace:MobileApp.Helpers"
+             mc:Ignorable="d"
+             x:Class="MobileApp.Views.Favoure.FavourePage">
+    <ContentPage.Resources>
+        <local:EventStatusColorConverter x:Key="TaskStatusColorConverter" />
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <Grid  BackgroundColor="{StaticResource EV_Lite_Blue}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="8*"/>
+                <RowDefinition Height="11*"/>
+            </Grid.RowDefinitions>
+
+            <!--#region Calendar-->
+            <Frame Grid.Row="0" 
+                   Padding="0" 
+                   IsClippedToBounds="True" 
+                   CornerRadius="0" >
+                <controls:Calendar Style="{StaticResource EV_Calendar}"
+                                   x:Name="Calenar"
+                                   SelectedDate="{Binding selDate}"
+                                   SpecialDates="{Binding special}"
+                                   VerticalOptions="Start"
+                                   HorizontalOptions="Fill"/>
+            </Frame>
+            <!-- #endregion -->
+
+            <StackLayout Grid.Row="1" Padding="15, 10">
+
+                <ListView x:Name="EventsListView"
+                          VerticalOptions="FillAndExpand"
+                          HasUnevenRows="true"
+                          RefreshCommand="{Binding LoadEventsCommand}"
+                          IsPullToRefreshEnabled="true"
+                          IsRefreshing="{Binding IsBusy, Mode=OneWay}"
+                          CachingStrategy="RecycleElement"
+                          ItemsSource="{Binding CurrentEvents}"
+                          SelectedItem="{Binding SelectedEvent, Mode=TwoWay}"
+                          ItemSelected="EventsListView_ItemSelected">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Grid Padding="0" Margin="0, 15">
+                                    <StackLayout Orientation="Horizontal" Spacing="20">
+                                        <Frame CornerRadius="0" BackgroundColor="{StaticResource EV_Accent_Pink}" WidthRequest="85">
+                                            <StackLayout Orientation="Vertical" Padding="5">
+                                                <Label FontSize="20" Style="{StaticResource LWhite}" HorizontalOptions="Center" Text="{Binding StartDate, StringFormat='{0:MMMM}'}" />
+
+                                                <Label FontSize="30" Style="{StaticResource LWhite}" HorizontalOptions="Center" Text="{Binding StartDate, StringFormat='{0:dd}'}" />
+                                            </StackLayout>
+                                        </Frame>
+
+                                        <StackLayout Orientation="Vertical" Spacing="10">
+                                            <Label Style="{StaticResource LWhite}" Text="{Binding Title}"/>
+                                            <StackLayout Orientation="Horizontal">
+                                                <Label Style="{StaticResource LWhite}" Text="{Binding StartDate, StringFormat='{0:h:mm tt}'}"/>
+                                                <Label Style="{StaticResource LWhite}" Text="-" />
+                                                <Label Style="{StaticResource LWhite}" Text="{Binding EndDate, StringFormat='{0:h:mm tt}'}"/>
+                                            </StackLayout>
+                                            <Label Style="{StaticResource LWhite}" Text="{Binding SupportPhone, StringFormat='Phone: {0}'}"/>
+                                        </StackLayout>
+                                    </StackLayout>
+                                </Grid>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackLayout>
+        </Grid>
+    </ContentPage.Content>
+
+</ContentPage>

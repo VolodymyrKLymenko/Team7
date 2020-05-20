@@ -1,5 +1,6 @@
 ﻿using MobileApp.Models;
 using MobileApp.Views.Events;
+using MobileApp.Views.Favoure;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -39,6 +40,9 @@ namespace MobileApp.Views
 				{
 					case (int)MenuItemType.Events:
 						MenuPages.Add(id, new NavigationPage(new EventsPage()));
+						break;
+					case (int)MenuItemType.Favoure:
+						MenuPages.Add(id, new NavigationPage(new FavourePage()));
 						break;
 				}
 			}

@@ -1,4 +1,6 @@
-﻿using Newtonsoft.Json;
+﻿using MobileApp.Models.Events;
+using MobileApp.Services.LiteDB;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -12,6 +14,10 @@ namespace MobileApp.Services
     class ServiceBase
     {
         protected HttpClient client => HttpSingleton.Get();
+		protected LiteDBService liteContext => LiteDBSingleton.Get();
+		protected HttpClientHandler handler => HttpSingleton.GetHandler();
+
+		protected static List<EventResponse> favoureEvents;
 
 		private string _prefix;
 		protected string prefix

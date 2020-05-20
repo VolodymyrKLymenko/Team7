@@ -25,7 +25,7 @@ namespace MobileApp.Views
             menuItems = new List<HomeMenuItem>
             {
                 new HomeMenuItem {Id = MenuItemType.Events, Title="Events", ImagePath="", TextColor = "#FFFFFF" },
-                //new HomeMenuItem {Id = MenuItemType.Events, Title="Events", ImagePath="", TextColor = "#FFFFFF" },
+                new HomeMenuItem {Id = MenuItemType.Favoure, Title="Selected Events", ImagePath="", TextColor = "#FFFFFF" },
                 //new HomeMenuItem {Id = MenuItemType.Events, Title="Events", ImagePath="", TextColor = "#FFFFFF" },
                 //new HomeMenuItem {Id = MenuItemType.Events, Title="Events", ImagePath="", TextColor = "#FFFFFF" },
             };

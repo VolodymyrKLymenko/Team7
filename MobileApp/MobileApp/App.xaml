@@ -3,10 +3,79 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:controls="clr-namespace:XamForms.Controls;assembly=XamForms.Controls.Calendar"
              mc:Ignorable="d"
              x:Class="MobileApp.App">
     <Application.Resources>
-        
+
+        <Color x:Key="NavigationPrimary">
+            #2196F3
+        </Color>
+
+        <Color x:Key="EV_Dark_Blue">
+            #191B3E
+        </Color>
+
+        <Color x:Key="EV_BG_Dark_Blue">
+            #0D0E26
+        </Color>
+
+        <Color x:Key="EV_Lite_Blue">
+            #3A3B5E
+        </Color>
+
+        <Color x:Key="EV_Accent_Pink">
+            #DF335C
+        </Color>
+
+        <Color x:Key="EV_Accent_Green">
+            #5FB565
+        </Color>
+
+        <Color x:Key="EV_Accent_Grey">
+            #828294
+        </Color>
+
+        <Color x:Key="EV_BG_Blue">
+            #2F304D
+        </Color>
+
+        <Style TargetType="SearchBar">
+            <Setter Property="TextColor" Value="Black"/>
+            <Setter Property="BackgroundColor" Value="White"/>
+            <Setter Property="PlaceholderColor" Value="{StaticResource EV_Accent_Grey}"/>
+            <Setter Property="Placeholder" Value="Search"/>
+        </Style>
+
+
+        <Style TargetType="NavigationPage">
+            <Setter Property="BarBackgroundColor" Value="{StaticResource EV_Dark_Blue}" />
+            <Setter Property="BarTextColor" Value="White" />
+        </Style>
+
+        <Style TargetType="controls:Calendar" x:Key="EV_Calendar">
+            <Setter Property="DatesTextColor" Value="White"/>
+            <Setter Property="BackgroundColor" Value="{StaticResource EV_Dark_Blue}"/>
+            <Setter Property="BorderWidth" Value="0"/>
+            <Setter Property="DatesBackgroundColor" Value="{StaticResource EV_Dark_Blue}"/>
+            <Setter Property="DatesTextColorOutsideMonth" Value="{StaticResource EV_Lite_Blue}"/>
+            <Setter Property="SelectedBackgroundColor" Value="{StaticResource EV_Accent_Pink}"/>
+            <Setter Property="SelectedTextColor" Value="White"/>
+            <Setter Property="TitleLeftArrowTextColor" Value="{StaticResource EV_Accent_Green}"/>
+            <Setter Property="TitleRightArrowTextColor" Value="{StaticResource EV_Accent_Green}"/>
+            <Setter Property="SelectedBorderColor" Value="{StaticResource EV_Dark_Blue}"/>
+            <Setter Property="TitleLabelTextColor" Value="White"/>
+            <Setter Property="DatesBackgroundColorOutsideMonth" Value="{StaticResource EV_Dark_Blue}"/>
+            <Setter Property="BorderColor" Value="{StaticResource EV_Dark_Blue}"/>
+        </Style>
+
+        <Style TargetType="Frame">
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="BackgroundColor" Value="{StaticResource EV_BG_Blue}"/>
+            <Setter Property="IsClippedToBounds" Value="True"/>
+            <Setter Property="CornerRadius" Value="10" />
+        </Style>
+
         <Style TargetType="Label" x:Key="LWhite">
             <Setter Property="TextColor" Value="White"/>
             <Setter Property="FontSize" Value="16"/>

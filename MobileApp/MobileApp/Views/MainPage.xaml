@@ -10,11 +10,11 @@
              x:Class="MobileApp.Views.MainPage">
 
     <MasterDetailPage.Master >
-        <views:MenuPage BackgroundColor="LightBlue" />
+        <views:MenuPage BackgroundColor="{StaticResource EV_BG_Blue}" />
     </MasterDetailPage.Master>
 
     <MasterDetailPage.Detail>
-        <NavigationPage BackgroundColor="White">
+        <NavigationPage BackgroundColor="{StaticResource EV_Lite_Blue}">
             <x:Arguments>
                 <viewsEvents:EventsPage />
             </x:Arguments>

@@ -7,6 +7,7 @@ namespace MobileApp.Models
 	public enum MenuItemType
 	{
 		Events, //TODO:Add more pages
+		Favoure
 	}
 
 	public class HomeMenuItem

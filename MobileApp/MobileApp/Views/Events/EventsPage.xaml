@@ -6,41 +6,40 @@
              mc:Ignorable="d"
              x:Class="MobileApp.Views.Events.EventsPage">
     <ContentPage.Content>
-        <StackLayout>
-            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand " Padding="10">
-                <Entry Placeholder="Search" HorizontalOptions="FillAndExpand" />
-                <Picker x:Name="SortPicker"
-                        Title="Sort by"
-                        HorizontalOptions="End">  <!--ItemsSource="{Binding SortList}"-->
-                    <Picker.ItemsSource>
-                        <x:Array Type="{x:Type x:String}">
-                            <x:String>Name</x:String>
-                            <x:String>Date</x:String>
-                        </x:Array>
-                    </Picker.ItemsSource>
-                </Picker>
-            </StackLayout>
+        <StackLayout Padding="15, 10" Spacing="15">
+            <Grid HeightRequest="60">
+                <Frame CornerRadius="20">
+                    <SearchBar TextChanged="SearchBar_TextChanged" x:Name="searchReq" />
+                </Frame>
+            </Grid>
             <ListView x:Name="EventsListView"
-                      ItemsSource="{Binding Events}"
+                      ItemsSource="{Binding Items}"
                       VerticalOptions="FillAndExpand"
                       HasUnevenRows="true">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <Frame Margin="15, 10, 15, 10" Padding="0" CornerRadius="15" BackgroundColor="LightBlue">
-                                <StackLayout Padding="10" Orientation="Vertical">
-                                    <Label Text="{Binding Title}" Style="{StaticResource LWhite}" />
-                                    
-                                    <Grid HeightRequest="300" BackgroundColor="White">
-                                        <Label HorizontalOptions="Center" VerticalOptions="Center" Text="There will be image" />
-                                    </Grid>
+                            <Grid Padding="0" Margin="0, 15">
+                                <StackLayout Orientation="Horizontal" Spacing="20">
+                                    <Frame CornerRadius="0" BackgroundColor="{StaticResource EV_Accent_Pink}" WidthRequest="85">
+                                        <StackLayout Orientation="Vertical" Padding="5">
+                                            <Label FontSize="20" Style="{StaticResource LWhite}" HorizontalOptions="Center" Text="{Binding StartDate, StringFormat='{0:MMMM}'}" />
+                                            
+                                            <Label FontSize="30" Style="{StaticResource LWhite}" HorizontalOptions="Center" Text="{Binding StartDate, StringFormat='{0:dd}'}" />
+                                        </StackLayout>
+                                    </Frame>
 
-                                    <StackLayout Orientation="Horizontal">
-                                        <Label Text="{Binding StartTime, StringFormat='{0:dd MMMM, yyyy}'}"/>
-                                        <Label Text="{Binding EndTime, StringFormat='{0:dd MMMM, yyyy}'}"/>
+                                    <StackLayout Orientation="Vertical" Spacing="10">
+                                        <Label Style="{StaticResource LWhite}" Text="{Binding Title}"/>
+                                        <StackLayout Orientation="Horizontal">
+                                            <Label Style="{StaticResource LWhite}" Text="{Binding StartDate, StringFormat='{0:h:mm tt}'}"/>
+                                            <Label Style="{StaticResource LWhite}" Text="-" />
+                                            <Label Style="{StaticResource LWhite}" Text="{Binding EndDate, StringFormat='{0:h:mm tt}'}"/>
+                                        </StackLayout>
+                                        <Label Style="{StaticResource LWhite}" Text="{Binding SupportPhone, StringFormat='Phone: {0}'}"/>
                                     </StackLayout>
                                 </StackLayout>
-                            </Frame>
+                            </Grid>
                         </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>

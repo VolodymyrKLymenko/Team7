@@ -1,4 +1,6 @@
 ﻿using MobileApp.Services;
+using MobileApp.Services.Events;
+using MobileApp.Services.LiteDB;
 using MobileApp.Views;
 using System;
 using System.IO;
@@ -23,6 +25,10 @@ namespace MobileApp
         public App()
         {
             InitializeComponent();
+
+            DependencyService.Register<EventsService>();
+            DependencyService.Register<FavoureService>();
+            DependencyService.Register<EventsLiteDBService>();
         }
 
         protected override void OnStart()
