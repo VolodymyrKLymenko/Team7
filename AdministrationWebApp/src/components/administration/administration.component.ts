@@ -1,66 +1,67 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild, AfterViewInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 
-import { LoginModel } from 'src/core/services/auth/login.model';
-import { TokenService } from 'src/core/services/auth/token.service';
-import { AccountService } from 'src/core/services/auth/account.service';
 import { CommonConstants } from 'src/core/utils/common-constants';
+import { EventModel } from 'src/core/models/event.model';
+import { EventService } from 'src/core/services/events/event.service';
+import { Column } from 'src/core/models/column.model';
+import { EventsTableConfiguration } from './table-config';
 
 @Component({
   selector: 'app-admin',
   templateUrl: './administration.component.html',
   styleUrls: ['./administration.component.styl']
 })
-export class AdministrationComponent implements OnInit {
-  public loginForm: FormGroup;
-  private model: LoginModel = new LoginModel();
-  private returnUrl: string = null;
-  
+export class AdministrationComponent implements OnInit, AfterViewInit {
+  public events: EventModel[];
+  public columns: Column[];
+
+  @ViewChild('titleDescriptionColumn') public titleDescriptionColumn: TemplateRef<any>;
+  @ViewChild('startDateColumn') public startDateColumn: TemplateRef<any>;
+
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private tokenService: TokenService,
-    private accountService: AccountService
+    private eventService: EventService
   ) { }
 
   public ngOnInit(): void {
-    this.createForm();
-    this.initializeReturnUrl();
+    this.updateEvents();
   }
 
-  private createForm(): void {
-    this.loginForm = new FormGroup({
-      userEmail: new FormControl('', [Validators.email, Validators.required]),
-      userPassword: new FormControl('', [Validators.required])
-    });
+  public ngAfterViewInit(): void {
+    this.initializeTableColumns();
   }
 
-  private initializeReturnUrl(): void {
-    this.returnUrl = this.route.snapshot.queryParams[CommonConstants.returnUrlSnapshot];
+  private updateEvents(): void {
+    this.eventService.getForUser()
+      .subscribe(res => {
+        this.events = res;
+      })
   }
 
-  public onSubmit(): void {
-    this.setValuesFromFormToModel();
-    this.tokenService.removeTokens();
-    this.accountService.authenticate(this.model)
-      .subscribe(result => {
-        if (result) {
-          this.router.navigate([this.returnUrl || '/']);
-          // this.notificationService.successAuthentication();
-        } else {
-          // this.notificationService.showApiErrorMessage(result);
-        }
-      });
+  private initializeTableColumns(): void {
+    const config = EventsTableConfiguration;
+
+    const titleConfig = config.get('Title');
+    titleConfig.RowContent = this.titleDescriptionColumn;
+    config.set('Title', titleConfig);
+
+    const startDateConfig = config.get('StartDate');
+    startDateConfig.RowContent = this.startDateColumn;
+    config.set('StartDate', startDateConfig);
+
+    this.columns = Array.from(config.values());
+
+    console.log(this.columns);
   }
 
-  public navigateToRegistration(): void {
-    this.router.navigate(['registration']);
+  public editEvent(event: EventModel, index: number): void {
+    console.log("edit", event, index);
   }
 
-  private setValuesFromFormToModel(): void {
-    const values = this.loginForm.getRawValue();
-    this.model.Email = values.userEmail;
-    this.model.Password = values.userPassword;
+  public createEvent(): void {
+    console.log("create new");
   }
 }

@@ -5,6 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AdministrationRoutingModule } from './administration-routing.module';
 import { AdministrationComponent } from './administration.component';
+import { TableModule } from '../shared/table/table.module';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { AdministrationComponent } from './administration.component';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    AdministrationRoutingModule
+    AdministrationRoutingModule,
+    TableModule
   ],
   providers: []
 })

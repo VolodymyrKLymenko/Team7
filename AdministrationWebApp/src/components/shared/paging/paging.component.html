@@ -1,0 +1,10 @@
+<div class="pagination-container">
+    <ul class="pagination">
+        <li class="page-item"
+            (click)="movePrevious()"
+            [class.disabled]="!previousAvaliable()"><span class="page-link">Previous</span></li>
+        <li class="page-item"
+            (click)="moveNext()"
+            [class.disabled]="!nextAvaliable()"><span class="page-link">Next</span></li>
+      </ul>
+</div>

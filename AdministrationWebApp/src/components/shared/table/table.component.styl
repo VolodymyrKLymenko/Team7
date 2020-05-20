@@ -1,0 +1,38 @@
+.table-container
+    padding 0
+    min-height 300px
+    table
+        table-layout fixed
+        margin-bottom 0
+        thead
+            tr
+                border-bottom none
+        tbody
+            tr
+                td
+                    word-break break-all
+                &:hover
+                    background-color #dddddd55
+
+.mobile-compability
+    table, thead, tbody, th, td, tr
+        display block
+	
+
+.mobile-compability
+	th
+        display none
+
+.mobile-compability
+    tr
+        border 1px solid #cccccc
+        td 
+            border none
+            border-bottom 1px solid #eee
+            display flex
+            .table-cell,
+            .mobile-header
+                flex-grow 1
+                flex-basis 50%
+            .mobile-header
+                font-weight bold
