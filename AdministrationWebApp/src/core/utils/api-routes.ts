@@ -1,7 +1,9 @@
 import { environment } from 'src/environments/environment';
 
 export const ApiRoutes = {
-    authenticate: `${environment.serverUrl}/account/login`,
-    registerPatient: `${environment.serverUrl}/account/register/admin`,
-    resetPassword: `${environment.serverUrl}/account/password`
+    authenticate: `${environment.serverUrl}/accounts/login`,
+    registerPatient: `${environment.serverUrl}/accounts/register/admin`,
+    resetPassword: `${environment.serverUrl}/accounts/password`,
+
+    events: `${environment.serverUrl}/events`
 };

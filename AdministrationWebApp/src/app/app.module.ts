@@ -7,16 +7,19 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AccordionModule } from 'primeng/accordion';
 import { ToolbarModule } from 'primeng/toolbar';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import { CardModule } from 'primeng/card';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoaderInterceptorService } from 'src/core/interceptors/loader.interceptor';
 import { BootstrapModule } from './bootstrap.module';
 import { AuthInterceptor } from 'src/core/interceptors/auth.interceptor';
+import { EventComponent } from './event/event.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    EventComponent
   ],
   imports: [
     AccordionModule,
@@ -28,7 +31,8 @@ import { AuthInterceptor } from 'src/core/interceptors/auth.interceptor';
     ToolbarModule,
     BrowserAnimationsModule,
     ProgressSpinnerModule,
-    BootstrapModule
+    BootstrapModule,
+    CardModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptorService, multi: true },

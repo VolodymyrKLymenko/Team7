@@ -5,15 +5,14 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { LoginModel } from 'src/core/services/auth/login.model';
 import { TokenService } from 'src/core/services/auth/token.service';
 import { AccountService } from 'src/core/services/auth/account.service';
-import { CommonConstants, UserRoles } from 'src/core/utils/common-constants';
-import { UserService } from 'src/core/services/auth/user.service';
+import { CommonConstants } from 'src/core/utils/common-constants';
 
 @Component({
-  selector: 'app-auth',
-  templateUrl: './auth.component.html',
-  styleUrls: ['./auth.component.styl']
+  selector: 'app-admin',
+  templateUrl: './administration.component.html',
+  styleUrls: ['./administration.component.styl']
 })
-export class AuthComponent implements OnInit {
+export class AdministrationComponent implements OnInit {
   public loginForm: FormGroup;
   private model: LoginModel = new LoginModel();
   private returnUrl: string = null;
@@ -22,8 +21,7 @@ export class AuthComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private tokenService: TokenService,
-    private accountService: AccountService,
-    private userService: UserService
+    private accountService: AccountService
   ) { }
 
   public ngOnInit(): void {
@@ -48,19 +46,16 @@ export class AuthComponent implements OnInit {
     this.accountService.authenticate(this.model)
       .subscribe(result => {
         if (result) {
-          var user = this.userService.getUserFromLocalStorage();
-
-          if (user.UserRole == UserRoles.administrator) {
-            this.router.navigate([this.returnUrl || '/admin']);
-          }
-          else if (user.UserRole == UserRoles.superadmin) {
-            this.router.navigate([this.returnUrl || '/superadmin']);
-          }
+          this.router.navigate([this.returnUrl || '/']);
+          // this.notificationService.successAuthentication();
         } else {
-          console.log('ERRPR', result);
           // this.notificationService.showApiErrorMessage(result);
         }
       });
+  }
+
+  public navigateToRegistration(): void {
+    this.router.navigate(['registration']);
   }
 
   private setValuesFromFormToModel(): void {

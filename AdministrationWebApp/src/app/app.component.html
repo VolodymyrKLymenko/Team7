@@ -1,13 +1,10 @@
 <div class="app-container">
   <nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
-    <a class="navbar-brand" href="#">Events</a>
+    <a class="navbar-brand" routerLink="/">Events</a>
     <div class="collapse navbar-collapse">
       <ul class="navbar-nav mr-auto">
         <li *ngIf="isAuthenticated" class="nav-item">
-          <a class="nav-link" routerLink="/admin">Administration</a>
-        </li>
-        <li *ngIf="isAuthenticated" class="nav-item">
-          <a class="nav-link" routerLink="/superadmin">SuperAdministrator</a>
+          <a class="nav-link" (click)="navigateAdmin()">Administration</a>
         </li>
         <li *ngIf="isAuthenticated" class="nav-item">
           <a class="nav-link" routerLink="/profile">Profile</a>
@@ -33,6 +30,11 @@
         </div>
     </div>
   </nav>
+  <div *ngIf="events && isStartPage" class="events-container">
+    <div *ngFor="let item of events" class="event">
+      <app-event [event]="item"></app-event>
+    </div>
+  </div>
   <router-outlet></router-outlet>
   <div *ngIf="hasLoadedResources" class="loader-conatainer">
     <p-progressSpinner></p-progressSpinner>

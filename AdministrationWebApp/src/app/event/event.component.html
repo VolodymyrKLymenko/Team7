@@ -1,0 +1,19 @@
+<div class="container">
+    <div class="event-container">
+        <p-card [header]="event.title" [subheader]="event.description" styleClass="ui-card-shadow">
+            <p-header>
+                <img src="Card" src="assets/images/usercard.png">
+            </p-header>
+            <div class="event-body">
+                <p>Details </p>
+                University: {{event.organizedUniversity}}<br>
+                Location: {{event.location}}<br>
+                Starting: {{event.startDate}}<br>
+                Ending: {{event.endDate}}<br>
+            </div>
+            <p-footer>
+                Contact phone number: {{event.supportPhone}}
+            </p-footer>
+        </p-card>
+    </div>
+</div>

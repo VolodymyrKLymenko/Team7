@@ -56,13 +56,13 @@ export class AccountService {
 
   private updateLoginationData(loginResult: LoginResultModel): void {
     if (loginResult !== null) {
-      const token = loginResult.AccessToken;
+      const token = loginResult.accessToken;
       this.tokenService.setAccessToken(token);
 
       const user = {
         UserRole: decode(token).role,
-        Id: loginResult.UserId,
-        UserName: loginResult.UserName
+        Id: loginResult.userId,
+        UserName: loginResult.userName
       } as User;
 
       this.user = user;
