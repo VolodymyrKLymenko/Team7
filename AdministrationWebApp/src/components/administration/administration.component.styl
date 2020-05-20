@@ -1,18 +1,58 @@
 @import '~src/styles/form.styl'
 @import '~src/styles/auth-form.styl'
 
-.auth-form
-    margin-top 5em
-    .form-submit
-        cursor pointer
+.admin-container
+    padding 50px 0
+    height 100%
+    .create-container
+        position fixed
+        width 70px
+        height 70px
+        margin 20px
+        bottom 20px
+        right 30px
 
-.form-label-group
-    margin 1em 0
+    .document-list
+        ul
+            li
+                word-wrap break-word
+                cursor pointer
+.action-btn
+    width 100px
+    margin .5em
 
-.creation-link
-    padding .5em
-    text-align center
-    a
+.status-action-btn
+    background-color #d3d3d3
+    border none
+    color #000000
+
+.status-column
+    display flex
+    flex-wrap wrap
+    justify-content center
+    .update-name
+        flex-basis 100%
+        text-align left
         font-size 1.2em
-        color #333333
-        cursor pointer
+    .staging-item
+        text-align center
+        flex-grow 1
+        padding .2em
+        margin 1em
+        border-radius 1em
+        background-color #333333
+        color #ffffff
+    .staging-item-Confirmed
+        background-color #38d160
+    .staging-item-InProgress
+        background-color #1a7799
+    .staging-item-Rejected,
+    .staging-item-Canceled
+        background-color #72103a
+    .staging-item-Completed
+        background-color #a89b10
+
+::ng-deep
+    .ui-dropdown
+        display flex
+        min-width 0

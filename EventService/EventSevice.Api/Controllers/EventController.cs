@@ -57,18 +57,6 @@ namespace EventSevice.Api.Controllers
                         Status = EventStatus.Pending,
                         OrganizedUniversity = "NULP",
                         SupportPhone = "+38093512412"
-                    },
-                    new EventResponse
-                    {
-                        Id = 3,
-                        Title = "Event3",
-                        Description = "aslb as; hal gla glkash glsa hglash glaj glksh gldsh glh dsgl hsdl ghs;dg h",
-                        Location = "Mars plannet",
-                        StartDate = DateTime.Now.Add(new TimeSpan(32, 0, 0)),
-                        EndDate = DateTime.Now.Add(new TimeSpan(32, 30, 0)),
-                        Status = EventStatus.Pending,
-                        OrganizedUniversity = "NULP",
-                        SupportPhone = "+38093512412"
                     }
                 };
         }
@@ -82,7 +70,8 @@ namespace EventSevice.Api.Controllers
                     new EventResponse
                     {
                         Id = 1,
-                        Description = "Event1",
+                        Title = "Event1",
+                        Description = "SGSA gas gpA goahg hA LGha:L Gha:LS GH;LASH Gl;ASH G;LAS HG;laSH G;laS Hgl;aSH gl;aH SG",
                         Location = "Main department Universitetska 1",
                         StartDate = DateTime.Now.Add(new TimeSpan(48, 0, 0)),
                         EndDate = DateTime.Now.Add(new TimeSpan(48, 50, 0)),
@@ -93,7 +82,8 @@ namespace EventSevice.Api.Controllers
                     new EventResponse
                     {
                         Id = 2,
-                        Description = "Event2",
+                        Title = "Event2",
+                        Description = "Event2 a gaskg jalg a;lg halhg ;lAH G;laSH G;lAShg ;laH g;lash g;lash g;lashg ;lasg h",
                         Location = "Main department Universitetska 1",
                         StartDate = DateTime.Now.Add(new TimeSpan(-24, 0, 0)),
                         EndDate = DateTime.Now.Add(new TimeSpan(-23, 30, 0)),

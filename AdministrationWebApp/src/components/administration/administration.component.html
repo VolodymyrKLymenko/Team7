@@ -1,1 +1,48 @@
-<h2>Admin of university</h2>
+<div class="admin-container">
+    <app-table *ngIf="events && columns"
+               [columns]="columns"
+               [data]="events"
+               [mobileWidth]="768"
+               (rowClicked)="editEvent($event.data, $event.index)">
+    </app-table>
+    <div class="create-container">
+      <button class="btn btn-dark"
+              type="button"
+              (click)="createEvent()">
+        Create
+      </button>
+    </div>
+</div>
+  
+<ng-template let-data="data" #titleDescriptionColumn>
+  <div>
+    <span>{{data.title}}</span>
+  </div>
+  <div>
+    <span>{{data.description}}</span>
+  </div>
+</ng-template>
+
+<ng-template let-data="data" #startDateColumn>
+  <span> {{data.startDate | date:"MM.dd.yy 'at' hh:mm"}}</span>
+</ng-template>
+
+<!--
+  
+  <app-edit *ngIf="bookingToUpdate"
+            [visibility]="isEditWindowOpen"
+            [model]="bookingToUpdate"
+            [new]="isAddingNewBooking"
+            [isPatient]="isPatient"
+            [isClinician]="isClinician"
+            [isClinic]="isClinic"
+            (closeEditWindow)="closeEditWindow()"
+            (editCompleted)="editBooking($event)">
+  </app-edit>
+  
+  <app-save-knowledge *ngIf="showSaveModal"
+                      [model]="bookingToSave"
+                      [visibility]="true"
+                      (onSave)="closeSavingModel($event)">
+  </app-save-knowledge>
+  -->
