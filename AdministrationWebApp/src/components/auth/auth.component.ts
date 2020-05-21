@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 
-import { LoginModel } from 'src/core/services/auth/login.model';
+import { LoginModel } from 'src/core/services/auth/login';
 import { TokenService } from 'src/core/services/auth/token.service';
 import { AccountService } from 'src/core/services/auth/account.service';
 import { CommonConstants, UserRoles, ValidationMessages } from 'src/core/utils/common-constants';

@@ -1,4 +1,4 @@
-import { Column } from 'src/core/models/column.model';
+import { Column } from 'src/core/models/column';
 
 export const EventsTableConfiguration = new Map([
     ['Title', new Column('Title', 'title')],

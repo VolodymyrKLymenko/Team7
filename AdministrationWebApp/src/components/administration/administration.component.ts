@@ -1,12 +1,12 @@
 import { Component, OnInit, TemplateRef, ViewChild, AfterViewInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
-import { EventModel } from 'src/core/models/event.model';
+import { EventModel } from 'src/core/models/event';
 import { EventService } from 'src/core/services/events/event.service';
-import { Column } from 'src/core/models/column.model';
+import { Column } from 'src/core/models/column';
 import { EventsTableConfiguration } from './table-config';
-import { UpdateEventModel } from 'src/core/services/events/update-event.model';
-import { CreateEventModel } from 'src/core/services/events/create-event.model';
+import { UpdateEventModel } from 'src/core/services/events/update-event';
+import { CreateEventModel } from 'src/core/services/events/create-event';
 import { FormValidationService } from 'src/core/services/validation/validation.service';
 import { ValidationMessages } from 'src/core/utils/common-constants';
 
