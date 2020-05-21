@@ -50,6 +50,13 @@ namespace EventService.DAL.Repositories
             context.SaveChanges();
         }
 
+        public void Remove(int id)
+        {
+            var entity = FindById(id);
+            dbSet.Remove(entity);
+            context.SaveChanges();
+        }
+
         public IEnumerable<TEntity> GetWithInclude(params Expression<Func<TEntity, object>>[] includeProperties)
         {
             return Include(includeProperties).ToList();
