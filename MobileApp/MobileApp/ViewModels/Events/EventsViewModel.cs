@@ -8,6 +8,7 @@ using System.Diagnostics;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
+using MobileApp.Services.LiteDB;
 
 namespace MobileApp.ViewModels.Events
 {
@@ -38,13 +39,15 @@ namespace MobileApp.ViewModels.Events
 
             Items = new ObservableCollection<EventResponse>();
 
+            DependencyService.Get<EventsLiteDBService>().RemoveAll();
+
             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
 
-            Items.Add(new EventResponse { Title = "First Event", Description = "Add some description there", StartDate = DateTime.Now.AddDays(1), EndDate = DateTime.Now.AddDays(1).AddHours(1), SupportPhone = "+38(096)-55-66-454" });
-            Items.Add(new EventResponse { Title = "Second Event", Description = "Add some description there", StartDate = DateTime.Now.AddDays(2), EndDate = DateTime.Now.AddDays(2).AddHours(2), SupportPhone = "+38(096)-55-66-454" });
-            Items.Add(new EventResponse { Title = "Third Event", Description = "Add some description there", StartDate = DateTime.Now.AddDays(3), EndDate = DateTime.Now.AddDays(3).AddHours(3), SupportPhone = "+38(096)-55-66-454" });
-            Items.Add(new EventResponse { Title = "Fourth Event", Description = "Add some description there", StartDate = DateTime.Now.AddDays(4), EndDate = DateTime.Now.AddDays(4).AddHours(4), SupportPhone = "+38(096)-55-66-454" });
-            Items.Add(new EventResponse { Title = "Fifth Event", Description = "Add some description there", StartDate = DateTime.Now.AddDays(5), EndDate = DateTime.Now.AddDays(5).AddHours(5), SupportPhone = "+38(096)-55-66-454" });
+            //Items.Add(new EventResponse { Title = "First Event", Description = "Add some description there", StartDate = DateTime.Now.AddDays(1), EndDate = DateTime.Now.AddDays(1).AddHours(1), SupportPhone = "+38(096)-55-66-454" });
+            //Items.Add(new EventResponse { Title = "Second Event", Description = "Add some description there", StartDate = DateTime.Now.AddDays(2), EndDate = DateTime.Now.AddDays(2).AddHours(2), SupportPhone = "+38(096)-55-66-454" });
+            //Items.Add(new EventResponse { Title = "Third Event", Description = "Add some description there", StartDate = DateTime.Now.AddDays(3), EndDate = DateTime.Now.AddDays(3).AddHours(3), SupportPhone = "+38(096)-55-66-454" });
+            //Items.Add(new EventResponse { Title = "Fourth Event", Description = "Add some description there", StartDate = DateTime.Now.AddDays(4), EndDate = DateTime.Now.AddDays(4).AddHours(4), SupportPhone = "+38(096)-55-66-454" });
+            //Items.Add(new EventResponse { Title = "Fifth Event", Description = "Add some description there", StartDate = DateTime.Now.AddDays(5), EndDate = DateTime.Now.AddDays(5).AddHours(5), SupportPhone = "+38(096)-55-66-454" });
 
         }
 
@@ -70,6 +73,10 @@ namespace MobileApp.ViewModels.Events
                     if (favoure != null)
                     {
                         i.isFavoure = true;
+                    }
+                    else
+                    {
+                        i.isFavoure = false;
                     }
 
                     Items.Add(i);

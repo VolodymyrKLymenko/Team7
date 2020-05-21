@@ -1,4 +1,5 @@
 ﻿using MobileApp.Models.Events;
+using MobileApp.Services.LiteDB;
 using MobileApp.ViewModels.Events;
 using System;
 using System.Collections.Generic;
@@ -20,7 +21,24 @@ namespace MobileApp.Views.Events
         {
             BindingContext = viewModel = new EventsViewModel();
 
+            if (viewModel.Items.Count == 0)
+            {
+                viewModel.LoadItemsCommand.Execute(null);
+            }
+
             InitializeComponent();
+        }
+
+        private async void OnItemSelected(object sender, SelectedItemChangedEventArgs args)
+        {
+            var item = args.SelectedItem as EventResponse;
+            if (item == null)
+                return;
+
+            await Navigation.PushAsync(new EventPage(new EventVM(item)), true);
+
+            // Manually deselect item.
+            EventsListView.SelectedItem = null;
         }
 
         #region Search
@@ -98,5 +116,32 @@ namespace MobileApp.Views.Events
             }
         }
         #endregion
+
+        private void Button_Clicked(object sender, EventArgs e)
+        {
+            var btn = (Button)sender;
+
+            if (btn.AutomationId != null)
+            {
+                var item = viewModel.Items.FirstOrDefault(x => x.Id == Convert.ToInt32(btn.AutomationId));
+
+                if (item != null)
+                {
+                    if (item.isFavoure)
+                    {
+                        item.isFavoure = false;
+                        DependencyService.Get<EventsLiteDBService>().RemoveEventFromFavoure(item.Id);
+                    }
+                    else
+                    {
+                        item.isFavoure = true;
+                        DependencyService.Get<EventsLiteDBService>().InsertEventToFavoure(item);
+                    }
+
+                    viewModel.LoadItemsCommand.Execute(null);
+                }
+            }
+
+        }
     }
 }

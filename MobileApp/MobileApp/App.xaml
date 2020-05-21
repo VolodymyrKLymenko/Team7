@@ -40,6 +40,11 @@
             #2F304D
         </Color>
 
+        <Style TargetType="Frame" x:Key="EV_EventInfo">
+            <Setter Property="BackgroundColor" Value="{StaticResource EV_Lite_Blue}"/>
+            <Setter Property="Padding" Value="9"/>
+        </Style>
+
         <Style TargetType="SearchBar">
             <Setter Property="TextColor" Value="Black"/>
             <Setter Property="BackgroundColor" Value="White"/>

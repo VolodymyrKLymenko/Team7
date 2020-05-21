@@ -13,7 +13,7 @@ namespace MobileApp
     public partial class App : Application
     {
         public static string AzureBackendUrl =
-            DeviceInfo.Platform == DevicePlatform.Android ? "http://localhost:7777/api/" : "http://localhost:7777/api/";
+            DeviceInfo.Platform == DevicePlatform.Android ? "https://localhost:44336/" : "https://localhost:44336/";
 
         internal static readonly string dbConectionString = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "lnuevents.db");
 

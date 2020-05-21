@@ -34,5 +34,14 @@ namespace MobileApp.Services.LiteDB
 
             return collection.FindAll();
         }
+
+        public int RemoveAll()
+        {
+            var collection = liteContext.FavoureEvents;
+
+            var result = collection.DeleteMany(_ => true);
+
+            return result;
+        }
     }
 }

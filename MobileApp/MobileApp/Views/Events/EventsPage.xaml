@@ -3,8 +3,13 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:local="clr-namespace:MobileApp.Helpers"
              mc:Ignorable="d"
              x:Class="MobileApp.Views.Events.EventsPage">
+    <ContentPage.Resources>
+        <local:EventFavoureColorConvert x:Key="EventFavoureColorConvert" />
+        <local:EventFavoureTextConvert x:Key="EventFavoureTextConvert" />
+    </ContentPage.Resources>
     <ContentPage.Content>
         <StackLayout Padding="15, 10" Spacing="15">
             <Grid HeightRequest="60">
@@ -15,28 +20,42 @@
             <ListView x:Name="EventsListView"
                       ItemsSource="{Binding Items}"
                       VerticalOptions="FillAndExpand"
-                      HasUnevenRows="true">
+                      HasUnevenRows="true"
+                      RefreshCommand="{Binding LoadItemsCommand}"
+                      IsPullToRefreshEnabled="true"
+                      IsRefreshing="{Binding IsBusy, Mode=OneWay}"
+                      CachingStrategy="RecycleElement"
+                      ItemSelected="OnItemSelected">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
                             <Grid Padding="0" Margin="0, 15">
-                                <StackLayout Orientation="Horizontal" Spacing="20">
-                                    <Frame CornerRadius="0" BackgroundColor="{StaticResource EV_Accent_Pink}" WidthRequest="85">
-                                        <StackLayout Orientation="Vertical" Padding="5">
+                                <StackLayout Orientation="Horizontal" Spacing="10">
+                                    <Frame Margin="5,0,0,0" CornerRadius="0" BackgroundColor="{StaticResource EV_Accent_Pink}" WidthRequest="90">
+                                        <StackLayout Orientation="Vertical" Padding="10">
                                             <Label FontSize="20" Style="{StaticResource LWhite}" HorizontalOptions="Center" Text="{Binding StartDate, StringFormat='{0:MMMM}'}" />
                                             
                                             <Label FontSize="30" Style="{StaticResource LWhite}" HorizontalOptions="Center" Text="{Binding StartDate, StringFormat='{0:dd}'}" />
                                         </StackLayout>
                                     </Frame>
 
-                                    <StackLayout Orientation="Vertical" Spacing="10">
-                                        <Label Style="{StaticResource LWhite}" Text="{Binding Title}"/>
+                                    <StackLayout Orientation="Vertical" Spacing="10" Padding="5,0" HorizontalOptions="FillAndExpand">
+                                        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                                            <Label HorizontalOptions="FillAndExpand" Style="{StaticResource LWhite}" Text="{Binding Title}"/>
+                                            <Button HorizontalOptions="End"
+                                                    HeightRequest="30"
+                                                    BackgroundColor="Transparent"
+                                                    Text="{Binding isFavoure, Converter={StaticResource EventFavoureTextConvert}}" 
+                                                    TextColor="{Binding isFavoure, Converter={StaticResource EventFavoureColorConvert}}"
+                                                    AutomationId="{Binding Id}"
+                                                    Clicked="Button_Clicked"/>
+                                        </StackLayout>
                                         <StackLayout Orientation="Horizontal">
                                             <Label Style="{StaticResource LWhite}" Text="{Binding StartDate, StringFormat='{0:h:mm tt}'}"/>
                                             <Label Style="{StaticResource LWhite}" Text="-" />
                                             <Label Style="{StaticResource LWhite}" Text="{Binding EndDate, StringFormat='{0:h:mm tt}'}"/>
                                         </StackLayout>
-                                        <Label Style="{StaticResource LWhite}" Text="{Binding SupportPhone, StringFormat='Phone: {0}'}"/>
+                                        <Label Style="{StaticResource LWhite}" Text="{Binding Location, StringFormat='Location: {0}'}"/>
                                     </StackLayout>
                                 </StackLayout>
                             </Grid>

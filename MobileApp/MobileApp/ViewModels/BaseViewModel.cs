@@ -6,7 +6,7 @@ using System.Text;
 
 namespace MobileApp.ViewModels
 {
-    class BaseViewModel : INotifyPropertyChanged
+    public class BaseViewModel : INotifyPropertyChanged
     {
 		bool isBusy = false;
 		public bool IsBusy

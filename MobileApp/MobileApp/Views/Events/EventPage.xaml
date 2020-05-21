@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:local="clr-namespace:MobileApp.Helpers"
+             mc:Ignorable="d"
+             x:Class="MobileApp.Views.Events.EventPage">
+    <ContentPage.Resources>
+        <local:EventStatusColorConverter x:Key="EventStatusColorConverter" />
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <StackLayout BackgroundColor="{StaticResource EV_Lite_Blue}">
+            <Frame BackgroundColor="{StaticResource EV_Dark_Blue}" 
+                   CornerRadius="0" 
+                   IsClippedToBounds="True" 
+                   Margin="0"
+                   Grid.Row="0"
+                   VerticalOptions="FillAndExpand">
+                <Grid Padding="15">
+                    <ScrollView>
+                        <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" Spacing="10">
+
+                            <Label Text="Title" TextColor="{StaticResource EV_Accent_Grey}"/>
+                            <Frame Style="{StaticResource EV_EventInfo}">
+                                <Label Style="{StaticResource LWhite}" TextColor="White" Text="{Binding SelectedEvent.Title}"/>
+                            </Frame>
+
+                            <Label Text="Description" TextColor="{StaticResource EV_Accent_Grey}"/>
+                            <Frame Style="{StaticResource EV_EventInfo}">
+                                <Label Style="{StaticResource LWhite}" Text="{Binding SelectedEvent.Description}"/>
+                            </Frame>
+
+                            <Label Text="Location" TextColor="{StaticResource EV_Accent_Grey}"/>
+                            <Frame Style="{StaticResource EV_EventInfo}">
+                                <Label Style="{StaticResource LWhite}" Text="{Binding SelectedEvent.Location}"/>
+                            </Frame>
+
+                            <Label Text="Status" TextColor="{StaticResource EV_Accent_Grey}"/>
+                            <Frame Style="{StaticResource EV_EventInfo}">
+                                <Label IsEnabled="False"
+                                       FontSize="16"
+                                       Text="{Binding SelectedEvent.Status}" 
+                                       TextColor="{Binding SelectedEvent.Status, Converter={StaticResource EventStatusColorConverter}}"/>
+                            </Frame>
+
+                            <Label Text="OrganizedUniversity" TextColor="{StaticResource EV_Accent_Grey}"/>
+                            <Frame Style="{StaticResource EV_EventInfo}">
+                                <Label Style="{StaticResource LWhite}" Text="{Binding SelectedEvent.OrganizedUniversity}"/>
+                            </Frame>
+
+                            <Label Text="SupportPhone" TextColor="{StaticResource EV_Accent_Grey}"/>
+                            <Frame Style="{StaticResource EV_EventInfo}">
+                                <Label Style="{StaticResource LWhite}" Text="{Binding SelectedEvent.SupportPhone}"/>
+                            </Frame>
+
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="1*"/>
+                                    <ColumnDefinition Width="1*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <StackLayout Orientation="Vertical" Grid.Column="0">
+                                    <Label Text="Start Date" TextColor="{StaticResource EV_Accent_Grey}"/>
+                                    <Frame Style="{StaticResource EV_EventInfo}">
+                                        <Label IsEnabled="False"
+                                           Style="{StaticResource LWhite}"
+                                           Text="{Binding SelectedEvent.StartDate, StringFormat='{0:MMMM dd, yyyy (h:mm tt)}'}"/>
+                                    </Frame>
+                                </StackLayout>
+
+                                <StackLayout Orientation="Vertical" Grid.Column="1">
+                                    <Label Text="End Date" TextColor="{StaticResource EV_Accent_Grey}"/>
+                                    <Frame Style="{StaticResource EV_EventInfo}">
+                                        <Label IsEnabled="False"
+                                           Style="{StaticResource LWhite}"
+                                           Text="{Binding SelectedEvent.EndDate, StringFormat='{0:MMMM dd, yyyy (h:mm tt)}'}"/>
+                                    </Frame>
+                                </StackLayout>
+
+                            </Grid>
+
+                            <Button HorizontalOptions="End" 
+                                    VerticalOptions="End"
+                                    Text="Less info"
+                                    TextColor="{StaticResource EV_Accent_Grey}"
+                                    FontSize="12"
+                                    BackgroundColor="Transparent"
+                                    Clicked="Button_Clicked"/>
+                        </StackLayout>
+                    </ScrollView>
+
+                </Grid>
+            </Frame>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

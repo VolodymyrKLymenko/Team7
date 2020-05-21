@@ -1,4 +1,6 @@
-﻿using MobileApp.ViewModels.Favoure;
+﻿using MobileApp.ViewModels.Events;
+using MobileApp.ViewModels.Favoure;
+using MobileApp.Views.Events;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,17 +29,12 @@ namespace MobileApp.Views.Favoure
             Calenar.SelectedDate = DateTime.Now;
         }
 
-        private void TasksDataStore_Reload(object sender, bool e)
-        {
-            viewModel.LoadEventsCommand.Execute(null);
-        }
-
         private void EventsListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
             if (viewModel.SelectedEvent != null)
             {
-                //Navigation.PushAsync(new EventPage(viewModel.SelectedEvent), true);
-                //viewModel.SelectedEvent = null;
+                Navigation.PushAsync(new EventPage(new EventVM(viewModel.SelectedEvent)), true);
+                viewModel.SelectedEvent = null;
             }
         }
     }

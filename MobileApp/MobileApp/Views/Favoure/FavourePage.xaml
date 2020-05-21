@@ -8,7 +8,7 @@
              mc:Ignorable="d"
              x:Class="MobileApp.Views.Favoure.FavourePage">
     <ContentPage.Resources>
-        <local:EventStatusColorConverter x:Key="TaskStatusColorConverter" />
+        <local:EventStatusColorConverter x:Key="EventStatusColorConverter" />
     </ContentPage.Resources>
     <ContentPage.Content>
         <Grid  BackgroundColor="{StaticResource EV_Lite_Blue}">
@@ -63,7 +63,7 @@
                                                 <Label Style="{StaticResource LWhite}" Text="-" />
                                                 <Label Style="{StaticResource LWhite}" Text="{Binding EndDate, StringFormat='{0:h:mm tt}'}"/>
                                             </StackLayout>
-                                            <Label Style="{StaticResource LWhite}" Text="{Binding SupportPhone, StringFormat='Phone: {0}'}"/>
+                                            <Label Style="{StaticResource LWhite}" Text="{Binding Location, StringFormat='Location: {0}'}"/>
                                         </StackLayout>
                                     </StackLayout>
                                 </Grid>

@@ -15,7 +15,7 @@ namespace MobileApp.Services.Events
 
         public async Task<IEnumerable<EventResponse>> GetItemsAsync(bool forceRefresh = false)
         {
-            var json = await Get("GetAll");
+            var json = await Get("");
 
             if (!string.IsNullOrEmpty(json))
             {
