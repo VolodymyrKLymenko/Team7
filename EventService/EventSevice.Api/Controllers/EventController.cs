@@ -11,6 +11,10 @@ namespace EventSevice.Api.Controllers
     {
         private readonly ILogger<EventController> _logger;
 
+        // TODO delete this. Only for mocking endpoint purpose
+        private static int EventCounter = 100;
+        
+            
         public EventController(ILogger<EventController> logger)
         {
             _logger = logger;
@@ -108,5 +112,60 @@ namespace EventSevice.Api.Controllers
         }
 
         public enum EventStatus { Pending = 1, Finished, Cancelled }
+
+        [HttpPost]
+        public ActionResult<EventResponse> UpdateEvent(int eventId, CreateEventRequest request)
+        {
+            return
+                new EventResponse
+                {
+                    Id = EventCounter++,
+                    Title = request.Title,
+                    Description = request.Description,
+                    Location = request.Location,
+                    StartDate = request.StartDate,
+                    EndDate = request.EndDate,
+                    Status = EventStatus.Pending,
+                    OrganizedUniversity = "LNU",
+                    SupportPhone = "+3809312412"
+                };
+        }
+
+        public class CreateEventRequest
+        {
+            public string Title { get; set; }
+            public string Description { get; set; }
+            public DateTime StartDate { get; set; }
+            public DateTime EndDate { get; set; }
+            public string Location { get; set; }
+        }
+
+        [HttpPut("{eventId}")]
+        public ActionResult<EventResponse> UpdateEvent(int eventId, UpdateEventRequest request)
+        {
+            return
+                new EventResponse
+                {
+                    Id = 2,
+                    Title = request.Title,
+                    Description = request.Description,
+                    Location = request.Location,
+                    StartDate = request.StartDate,
+                    EndDate = request.EndDate,
+                    Status = EventStatus.Pending,
+                    OrganizedUniversity = "LNU",
+                    SupportPhone = "+3809312412"
+                };
+        }
+
+        public class UpdateEventRequest
+        {
+            public int EventId { get; set; }
+            public string Title { get; set; }
+            public string Description { get; set; }
+            public DateTime StartDate { get; set; }
+            public DateTime EndDate { get; set; }
+            public string Location { get; set; }
+        }
     }
 }

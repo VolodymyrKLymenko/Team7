@@ -5,8 +5,9 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { LoginModel } from 'src/core/services/auth/login.model';
 import { TokenService } from 'src/core/services/auth/token.service';
 import { AccountService } from 'src/core/services/auth/account.service';
-import { CommonConstants, UserRoles } from 'src/core/utils/common-constants';
+import { CommonConstants, UserRoles, ValidationMessages } from 'src/core/utils/common-constants';
 import { UserService } from 'src/core/services/auth/user.service';
+import { FormValidationService } from 'src/core/services/validation/validation.service';
 
 @Component({
   selector: 'app-auth',
@@ -14,16 +15,20 @@ import { UserService } from 'src/core/services/auth/user.service';
   styleUrls: ['./auth.component.styl']
 })
 export class AuthComponent implements OnInit {
-  public loginForm: FormGroup;
   private model: LoginModel = new LoginModel();
   private returnUrl: string = null;
+
+  public loginForm: FormGroup;
+  public formErrors: any = {};
+  public submitTouched = false;
   
   constructor(
     private router: Router,
     private route: ActivatedRoute,
     private tokenService: TokenService,
     private accountService: AccountService,
-    private userService: UserService
+    private userService: UserService,
+    private formValidationService: FormValidationService
   ) { }
 
   public ngOnInit(): void {
@@ -36,6 +41,9 @@ export class AuthComponent implements OnInit {
       userEmail: new FormControl('', [Validators.email, Validators.required]),
       userPassword: new FormControl('', [Validators.required])
     });
+
+    this.formValidationService.setFormData(this.loginForm, ValidationMessages.Auth);
+    this.loginForm.valueChanges.subscribe(() => this.validateForm());
   }
 
   private initializeReturnUrl(): void {
@@ -43,29 +51,39 @@ export class AuthComponent implements OnInit {
   }
 
   public onSubmit(): void {
-    this.setValuesFromFormToModel();
-    this.tokenService.removeTokens();
-    this.accountService.authenticate(this.model)
-      .subscribe(result => {
-        if (result) {
-          var user = this.userService.getUserFromLocalStorage();
+    this.submitTouched = true;
 
-          if (user.UserRole == UserRoles.administrator) {
-            this.router.navigate([this.returnUrl || '/admin']);
+    if (this.loginForm.valid) {
+      this.setValuesFromFormToModel();
+      this.tokenService.removeTokens();
+      this.accountService.authenticate(this.model)
+        .subscribe(result => {
+          if (result) {
+            var user = this.userService.getUserFromLocalStorage();
+
+            if (user.UserRole == UserRoles.administrator) {
+              this.router.navigate([this.returnUrl || '/admin']);
+            }
+            else if (user.UserRole == UserRoles.superadmin) {
+              this.router.navigate([this.returnUrl || '/superadmin']);
+            }
+          } else {
+            console.log('error');
           }
-          else if (user.UserRole == UserRoles.superadmin) {
-            this.router.navigate([this.returnUrl || '/superadmin']);
-          }
-        } else {
-          console.log('ERRPR', result);
-          // this.notificationService.showApiErrorMessage(result);
-        }
-      });
+        });
+    } else {
+      this.formValidationService.markFormGroupTouched();
+      this.validateForm();
+    }
   }
 
   private setValuesFromFormToModel(): void {
     const values = this.loginForm.getRawValue();
     this.model.Email = values.userEmail;
     this.model.Password = values.userPassword;
+  }
+
+  private validateForm(): void {
+    this.formErrors = this.formValidationService.validateForm();
   }
 }

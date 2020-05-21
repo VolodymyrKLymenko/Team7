@@ -1,19 +1,31 @@
 <form class="auth-form" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-    <div class="form-label-group">
+    <div class="form-label-group"
+         [class.form-label-failed-group]="submitTouched && formErrors.userEmail">
         <label type="email">
             Email:
             <input formControlName="userEmail"
-                    class="form-control"
-                    type="text" >
+                   class="form-control"
+                   type="text">
+            <div *ngIf="submitTouched && formErrors.userEmail" class="validation-error-text">
+                {{formErrors.userEmail}}
+            </div>
         </label>
     </div>
-    <div class="form-label-group">
+    <div class="form-label-group"
+         [class.form-label-failed-group]="submitTouched && formErrors.userPassword">
         <label>
             Password:
             <input formControlName="userPassword"
                     class="form-control"
-                    type="password" >
+                    type="password">
+            <div *ngIf="submitTouched && formErrors.userPassword" class="validation-error-text">
+                {{formErrors.userPassword}}
+            </div>
         </label>
     </div>
-    <button type="submit" class="btn form-submit" [disabled]="!loginForm.valid">Submit</button>
+    <button type="submit"
+            class="btn form-submit"
+            [disabled]="submitTouched && !loginForm.valid">
+        Submit
+    </button>
 </form>
