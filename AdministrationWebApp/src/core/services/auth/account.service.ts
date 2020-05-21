@@ -4,14 +4,14 @@ import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import decode from 'jwt-decode';
 
-import { User } from 'src/core/models/user.model';
+import { User } from 'src/core/models/user';
 
 import { TokenService } from './token.service';
 import { UserService } from './user.service';
 import { ApiRoutes } from 'src/core/utils/api-routes';
-import { LoginModel, LoginResultModel } from './login.model';
-import { ResetPasswordModel } from './reset-password.model';
-import { RegistrationModel } from './registration.model';
+import { LoginModel, LoginResultModel } from './login';
+import { ResetPasswordModel } from './reset-password';
+import { RegistrationModel } from './registration';
 
 @Injectable({
   providedIn: 'root'

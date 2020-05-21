@@ -4,9 +4,9 @@ import { Observable } from 'rxjs';
 
 import { UserService } from '../auth/user.service';
 import { ApiRoutes } from 'src/core/utils/api-routes';
-import { EventModel } from 'src/core/models/event.model';
-import { CreateEventModel } from './create-event.model';
-import { UpdateEventModel } from './update-event.model';
+import { EventModel } from 'src/core/models/event';
+import { CreateEventModel } from './create-event';
+import { UpdateEventModel } from './update-event';
 
 @Injectable({
   providedIn: 'root'

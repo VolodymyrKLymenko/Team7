@@ -1,8 +1,8 @@
 import { Component, Input, Output, EventEmitter, HostListener, OnInit } from '@angular/core';
 import * as _ from 'lodash';
 
-import { Pagination } from 'src/core/models/pagination.model';
-import { Column } from 'src/core/models/column.model';
+import { Pagination } from 'src/core/models/pagination';
+import { Column } from 'src/core/models/column';
 
 @Component({
   selector: 'app-table',

@@ -1,5 +1,5 @@
 import { Component, Output, EventEmitter, Input } from '@angular/core';
-import { Pagination } from 'src/core/models/pagination.model';
+import { Pagination } from 'src/core/models/pagination';
 
 @Component({
   selector: 'app-paging',

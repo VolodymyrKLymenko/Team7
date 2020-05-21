@@ -6,7 +6,7 @@ import { Subscription } from 'rxjs';
 import { TokenService } from 'src/core/services/auth/token.service';
 import { AccountService } from 'src/core/services/auth/account.service';
 import { LoaderService, LoaderState } from 'src/core/services/loader/loader.service';
-import { User } from 'src/core/models/user.model';
+import { User } from 'src/core/models/user';
 import { UserService } from 'src/core/services/auth/user.service';
 import { UserRoles } from 'src/core/utils/common-constants';
 import { EventModel } from 'src/core/models/event.model';
