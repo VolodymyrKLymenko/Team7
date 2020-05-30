@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { UserService } from 'src/core/services/auth/user.service';
-import { EventModel } from 'src/core/models/event.model';
+import { EventModel } from 'src/core/models/event';
 import { EventService } from 'src/core/services/events/event.service';
 
 @Component({
@@ -11,7 +11,7 @@ import { EventService } from 'src/core/services/events/event.service';
   styleUrls: ['./event.component.styl']
 })
 export class EventComponent implements OnInit {
-  @Input('event') public event: EventModel
+  @Input('event') public event: EventModel;
 
   constructor(
     private router: Router,

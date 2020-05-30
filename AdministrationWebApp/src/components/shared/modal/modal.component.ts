@@ -7,7 +7,7 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 })
 export class ModalComponent {
   @Input('isVisiable') public isVisiable = false;
-  @Output('changed')   public visibleChange = new EventEmitter<boolean>();
+  @Output('changed') public visibleChange = new EventEmitter<boolean>();
 
   public hideWindow(): void {
     this.isVisiable = false;

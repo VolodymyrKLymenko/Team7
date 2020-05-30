@@ -21,7 +21,7 @@ export class AuthComponent implements OnInit {
   public loginForm: FormGroup;
   public formErrors: any = {};
   public submitTouched = false;
-  
+
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -59,12 +59,12 @@ export class AuthComponent implements OnInit {
       this.accountService.authenticate(this.model)
         .subscribe(result => {
           if (result) {
-            var user = this.userService.getUserFromLocalStorage();
+            const user = this.userService.getUserFromLocalStorage();
 
-            if (user.UserRole == UserRoles.administrator) {
+            if (user.UserRole === UserRoles.administrator) {
               this.router.navigate([this.returnUrl || '/admin']);
             }
-            else if (user.UserRole == UserRoles.superadmin) {
+            else if (user.UserRole === UserRoles.superadmin) {
               this.router.navigate([this.returnUrl || '/superadmin']);
             }
           } else {

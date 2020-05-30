@@ -9,7 +9,7 @@ import { LoaderService, LoaderState } from 'src/core/services/loader/loader.serv
 import { User } from 'src/core/models/user';
 import { UserService } from 'src/core/services/auth/user.service';
 import { UserRoles } from 'src/core/utils/common-constants';
-import { EventModel } from 'src/core/models/event.model';
+import { EventModel } from 'src/core/models/event';
 import { EventService } from 'src/core/services/events/event.service';
 
 @Component({
@@ -21,7 +21,7 @@ export class AppComponent implements OnInit {
   public hasLoadedResources = false;
   public screenWidth: number;
   public user: User = null;
-  public events: EventModel[]
+  public events: EventModel[];
 
   private subscription: Subscription;
   private minWidthForNavDropDown = 768;
@@ -86,12 +86,12 @@ export class AppComponent implements OnInit {
   }
 
   public navigateAdmin(): void {
-    var user = this.userService.getUserFromLocalStorage();
+    const user = this.userService.getUserFromLocalStorage();
 
-    if (user.UserRole == UserRoles.administrator) {
+    if (user.UserRole === UserRoles.administrator) {
       this.router.navigate(['/admin']);
     }
-    else if (user.UserRole == UserRoles.superadmin) {
+    else if (user.UserRole === UserRoles.superadmin) {
       this.router.navigate(['/superadmin']);
     }
   }

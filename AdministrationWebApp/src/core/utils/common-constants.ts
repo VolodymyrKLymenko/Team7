@@ -5,7 +5,7 @@ export const CommonConstants = {
 export const UserRoles = {
     administrator: 'admin',
     superadmin: 'super-admin'
-}
+};
 
 export const ValidationMessages = {
     EditEvents: {
@@ -28,10 +28,10 @@ export const ValidationMessages = {
     Auth: {
         userEmail: {
             required: 'Email is required.',
-            email: "Email is invalid"
+            email: 'Email is invalid'
         },
         userPassword: {
             required: 'Password is required.'
         }
     }
-}
+};

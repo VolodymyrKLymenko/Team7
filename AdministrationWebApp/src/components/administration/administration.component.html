@@ -13,14 +13,10 @@
       </button>
     </div>
 </div>
-  
+
 <ng-template let-data="data" #titleDescriptionColumn>
   <div>
     <span style="font-size: 1.2em;">{{data.title}}</span>
-  </div>
-  <div>
-    <hr>
-    <span>{{data.description}}</span>
   </div>
 </ng-template>
 
@@ -107,7 +103,7 @@
           </div>
         </label>
       </div>
-      <div class="form-label-group"
+      <div *nfIf="canEditTitle" class="form-label-group"
            [class.form-label-failed-group]="submitTouched && formErrors.support">
         <label>
             Support phone:

@@ -22,7 +22,7 @@ export class EventService {
   }
 
   public getForUser(): Observable<EventModel[]> {
-    var user = this.userService.getUserFromLocalStorage();
+    const user = this.userService.getUserFromLocalStorage();
 
     return this.http.get<EventModel[]>(`${ApiRoutes.events}/${user.Id}`);
   }

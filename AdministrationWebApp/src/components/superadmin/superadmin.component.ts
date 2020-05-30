@@ -16,7 +16,7 @@ export class SuperAdminComponent implements OnInit {
   public loginForm: FormGroup;
   private model: LoginModel = new LoginModel();
   private returnUrl: string = null;
-  
+
   constructor(
     private router: Router,
     private route: ActivatedRoute,

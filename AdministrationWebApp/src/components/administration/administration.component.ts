@@ -51,7 +51,7 @@ export class AdministrationComponent implements OnInit, AfterViewInit {
     this.eventService.getForUser()
       .subscribe(res => {
         this.events = res;
-      })
+      });
   }
 
   private initializeTableColumns(): void {
@@ -105,8 +105,9 @@ export class AdministrationComponent implements OnInit, AfterViewInit {
 
     if (this.actionForm.valid) {
       if (this.eventToUpdate) {
+        this.eventToUpdate.title = this.eventTitleToEdit;
         this.eventToUpdate.description = this.actionForm.controls['description'].value;
-        this.eventToUpdate.location = this.actionForm.controls['description'].value;
+        this.eventToUpdate.location = this.actionForm.controls['location'].value;
         this.eventToUpdate.startDate = this.actionForm.controls['startDate'].value;
         this.eventToUpdate.endDate = this.actionForm.controls['endDate'].value;
 
@@ -118,14 +119,14 @@ export class AdministrationComponent implements OnInit, AfterViewInit {
       else {
         this.eventToCreate.title = this.actionForm.controls['title'].value;
         this.eventToCreate.description = this.actionForm.controls['description'].value;
-        this.eventToCreate.location = this.actionForm.controls['description'].value;
+        this.eventToCreate.location = this.actionForm.controls['location'].value;
         this.eventToCreate.startDate = this.actionForm.controls['startDate'].value;
         this.eventToCreate.endDate = this.actionForm.controls['endDate'].value;
 
         this.eventService.createEvent(this.eventToCreate)
           .subscribe(res => {
             this.events.splice(0, 0, res);
-          })
+          });
       }
       this.resetForm();
     }
