@@ -9,6 +9,7 @@ branches:
   only:
     - master
 before_script:
+  - cd AdministrationWebApp
   - npm install -g @angular/cli
 script:
   - npm install
