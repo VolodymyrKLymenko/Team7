@@ -19,5 +19,5 @@ script:
   - ng lint
   - ng build --prod
 after_success:
-  - firebase use webapp-1d45e
+  - firebase use default
   - firebase deploy --token $FIREBASE_TOKEN
