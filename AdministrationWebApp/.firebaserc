@@ -1,5 +1,6 @@
 {
   "projects": {
+    "staging": "webapp-1d45e",
     "default": "webapp-1d45e"
   }
 }
