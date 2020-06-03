@@ -1,8 +1,8 @@
 import { Component, Input, Output, EventEmitter, HostListener, OnInit } from '@angular/core';
 import * as _ from 'lodash';
 
-import { Pagination } from 'src/core/models/pagination.model';
-import { Column } from 'src/core/models/column.model';
+import { Pagination } from 'src/core/models/pagination';
+import { Column } from 'src/core/models/column';
 
 @Component({
   selector: 'app-table',
@@ -19,8 +19,9 @@ export class TableComponent implements OnInit {
   @Input('mobileWidth') public minAvaliableWidth;
   @Input('rowAmount') public rowAmount = 10;
   @Input('totalAmount') public totalAmount = 0;
-  @Output('rowClicked') public onRowClicked = new EventEmitter<any>();
-  @Output('pageChanged') public onPageChanged = new EventEmitter<Pagination>();
+
+  @Output('rowClicked') public rowClickedEvent = new EventEmitter<any>();
+  @Output('pageChanged') public pageChangedEvent = new EventEmitter<Pagination>();
 
   @HostListener('window:resize', ['$event'])
   public onResize(event: any): void {
@@ -41,17 +42,17 @@ export class TableComponent implements OnInit {
   }
 
   public rowClicked(data: any): void {
-    this.onRowClicked.emit(data);
+    this.rowClickedEvent.emit(data);
   }
 
   public moveToNextPage(): void {
     this.pagination.pageNumber++;
-    this.onPageChanged.emit(this.pagination);
+    this.pageChangedEvent.emit(this.pagination);
   }
 
   public moveToPreviousPage(): void {
     this.pagination.pageNumber--;
-    this.onPageChanged.emit(this.pagination);
+    this.pageChangedEvent.emit(this.pagination);
   }
 
   private setUpPagintaion(): void {

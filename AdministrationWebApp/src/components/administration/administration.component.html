@@ -13,13 +13,10 @@
       </button>
     </div>
 </div>
-  
+
 <ng-template let-data="data" #titleDescriptionColumn>
   <div>
-    <span>{{data.title}}</span>
-  </div>
-  <div>
-    <span>{{data.description}}</span>
+    <span style="font-size: 1.2em;">{{data.title}}</span>
   </div>
 </ng-template>
 
@@ -27,22 +24,104 @@
   <span> {{data.startDate | date:"MM.dd.yy 'at' hh:mm"}}</span>
 </ng-template>
 
-<!--
-  
-  <app-edit *ngIf="bookingToUpdate"
-            [visibility]="isEditWindowOpen"
-            [model]="bookingToUpdate"
-            [new]="isAddingNewBooking"
-            [isPatient]="isPatient"
-            [isClinician]="isClinician"
-            [isClinic]="isClinic"
-            (closeEditWindow)="closeEditWindow()"
-            (editCompleted)="editBooking($event)">
-  </app-edit>
-  
-  <app-save-knowledge *ngIf="showSaveModal"
-                      [model]="bookingToSave"
-                      [visibility]="true"
-                      (onSave)="closeSavingModel($event)">
-  </app-save-knowledge>
-  -->
+
+
+
+<app-modal
+    *ngIf="isEditWindowOpen"
+    [isVisiable]="isEditWindowOpen"
+    (changed)="changeEditWindowVisibility($event)">
+  <div class="edit-header" m-header>
+      Edit event
+  </div>
+  <div m-close-button>CLOSE</div>
+  <div class="edit-container">
+    <form
+        [formGroup]="actionForm"
+        (ngSubmit)="onSubmit()">
+      <div class="form-label-group"
+           [class.form-label-failed-group]="submitTouched && formErrors.title">
+        <label>
+            Title:
+          <input type="text"
+                 class="form-control"
+                 formControlName="title"
+                 [attr.disabled]="!canEditTitle ? '' : null">
+          <div *ngIf="submitTouched && formErrors.title" class="validation-error-text">
+            {{formErrors.title}}
+          </div>
+        </label>
+      </div>
+      <div class="form-label-group"
+           [class.form-label-failed-group]="submitTouched && formErrors.description">
+        <label>
+            Decription:
+          <textarea type="text"
+                    class="form-control"
+                    formControlName="description">
+          </textarea>
+          <div *ngIf="submitTouched && formErrors.description" class="validation-error-text">
+            {{formErrors.description}}
+          </div>
+        </label>
+      </div>
+      <div class="form-label-group"
+           [class.form-label-failed-group]="submitTouched && formErrors.location">
+        <label>
+            Location:
+          <input type="text"
+                 class="form-control"
+                 formControlName="location">
+          <div *ngIf="submitTouched && formErrors.location" class="validation-error-text">
+            {{formErrors.location}}
+          </div>
+        </label>
+      </div>
+      <div class="form-label-group"
+           [class.form-label-failed-group]="submitTouched && formErrors.startDate">
+        <label>
+            Starting at:
+          <p-calendar formControlName="startDate"
+                      showTime="true"
+                      hourFormat="24">
+          </p-calendar>
+          <div *ngIf="submitTouched && formErrors.startDate" class="validation-error-text">
+            {{formErrors.startDate}}
+          </div>
+        </label>
+      </div>
+      <div class="form-label-group"
+           [class.form-label-failed-group]="submitTouched && formErrors.endDate">
+        <label>
+            Ending at:
+          <p-calendar formControlName="endDate"
+                      showTime="true"
+                      hourFormat="24">
+          </p-calendar>
+          <div *ngIf="submitTouched && formErrors.endDate" class="validation-error-text">
+            {{formErrors.endDate}}
+          </div>
+        </label>
+      </div>
+      <div *nfIf="canEditTitle" class="form-label-group"
+           [class.form-label-failed-group]="submitTouched && formErrors.support">
+        <label>
+            Support phone:
+          <input type="text"
+                 class="form-control"
+                 formControlName="support"
+                 [attr.disabled]="''">
+          <div *ngIf="submitTouched && formErrors.support" class="validation-error-text">
+            {{formErrors.support}}
+          </div>
+        </label>
+      </div>
+    </form>
+  </div>
+  <div m-footer>
+    <button type="submit"
+            class="btn btn-primary"
+            (click)="onSubmit()"
+            [disabled]="submitTouched && !actionForm.valid">Submit</button>
+  </div>
+</app-modal>

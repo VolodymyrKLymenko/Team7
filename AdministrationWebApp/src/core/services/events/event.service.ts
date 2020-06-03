@@ -4,7 +4,9 @@ import { Observable } from 'rxjs';
 
 import { UserService } from '../auth/user.service';
 import { ApiRoutes } from 'src/core/utils/api-routes';
-import { EventModel } from 'src/core/models/event.model';
+import { EventModel } from 'src/core/models/event';
+import { CreateEventModel } from './create-event';
+import { UpdateEventModel } from './update-event';
 
 @Injectable({
   providedIn: 'root'
@@ -20,8 +22,16 @@ export class EventService {
   }
 
   public getForUser(): Observable<EventModel[]> {
-    var user = this.userService.getUserFromLocalStorage();
+    const user = this.userService.getUserFromLocalStorage();
 
     return this.http.get<EventModel[]>(`${ApiRoutes.events}/${user.Id}`);
+  }
+
+  public createEvent(request: CreateEventModel): Observable<EventModel> {
+    return this.http.post<EventModel>(ApiRoutes.events, request);
+  }
+
+  public updateEvent(eventId: number, request: UpdateEventModel): Observable<EventModel> {
+    return this.http.put<EventModel>(`${ApiRoutes.events}/${eventId}`, request);
   }
 }

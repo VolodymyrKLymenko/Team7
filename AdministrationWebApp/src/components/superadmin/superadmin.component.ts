@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 
-import { LoginModel } from 'src/core/services/auth/login.model';
+import { LoginModel } from 'src/core/services/auth/login';
 import { TokenService } from 'src/core/services/auth/token.service';
 import { AccountService } from 'src/core/services/auth/account.service';
 import { CommonConstants } from 'src/core/utils/common-constants';
@@ -16,7 +16,7 @@ export class SuperAdminComponent implements OnInit {
   public loginForm: FormGroup;
   private model: LoginModel = new LoginModel();
   private returnUrl: string = null;
-  
+
   constructor(
     private router: Router,
     private route: ActivatedRoute,

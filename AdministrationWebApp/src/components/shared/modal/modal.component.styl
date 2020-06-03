@@ -1,0 +1,29 @@
+.modal-background
+    background-color #00000099
+    position fixed
+    height 100%
+    width 100%
+    top 0
+    left 0
+    z-index 10000
+
+.modal-container
+    transform translate(-50%, -50%)
+    position fixed
+    top 50%
+    left 50%
+    background-color #ffffff
+    z-index 100000
+    box-shadow 0 0 12px 0 #00000080
+    border-radius 5px
+    .modal-header
+        align-items center
+        margin 10px
+    .modal-content
+        overflow auto
+        max-height 60vh
+    .modal-footer
+        display grid
+
+.close-button
+    cursor pointer
