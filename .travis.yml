@@ -11,8 +11,8 @@ branches:
 before_install:
   - cd AdministrationWebApp
 before_script:
-  - npm install firebase-tools -g
   - npm install -g @angular/cli
+  - npm install firebase-tools -g
 script:
   - npm install
   - ng lint
