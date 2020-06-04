@@ -1,4 +1,5 @@
-﻿using EventService.DAL.Interfaces;
+﻿using EventService.DAL.Context;
+using EventService.DAL.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -9,10 +10,10 @@ namespace EventService.DAL.Repositories
 {
     public class GenericRepository<TEntity> : IGenericRepository<TEntity> where TEntity : class
     {
-        private readonly DbContext context;
+        private readonly ApplicationContext context;
         private readonly DbSet<TEntity> dbSet;
 
-        public GenericRepository(DbContext context)
+        public GenericRepository(ApplicationContext context)
         {
             this.context = context;
             dbSet = context.Set<TEntity>();

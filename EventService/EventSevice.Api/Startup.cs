@@ -1,9 +1,18 @@
+using AutoMapper;
+using EventService.BLL.Interfaces;
+using EventService.BLL.Profiles;
+using EventService.DAL.Context;
+using EventService.DAL.Interfaces;
+using EventService.DAL.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+
+using EventServiceType = EventService.BLL.Services.EventService;
 
 namespace EventSevice.Api
 {
@@ -20,6 +29,20 @@ namespace EventSevice.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+
+            services.AddDbContext<ApplicationContext>(opts => opts.UseSqlServer(@"Data Source=.\SQLEXPRESS;Initial Catalog=EventAppDb;Integrated Security=True"));
+
+            services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+
+            services.AddTransient<IEventService, EventServiceType>();
+
+            var mappingConfig = new MapperConfiguration(mc =>
+            {
+                mc.AddProfile(new MappingProfile());
+            });
+
+            IMapper mapper = mappingConfig.CreateMapper();
+            services.AddSingleton(mapper);
 
             services.AddSwaggerGen(options =>
             {

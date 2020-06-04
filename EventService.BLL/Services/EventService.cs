@@ -3,6 +3,8 @@ using EventService.BLL.Interfaces;
 using EventService.BLL.Models;
 using EventService.DAL.Entities;
 using EventService.DAL.Interfaces;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace EventService.BLL.Services
 {
@@ -25,5 +27,8 @@ namespace EventService.BLL.Services
 
         public void Remove(int eventId) =>
             events.Remove(eventId);
+
+        public IEnumerable<EventDto> GetAll() =>
+            events.Get().Select(x => mapper.Map<EventDto>(x)).ToArray();
     }
 }
