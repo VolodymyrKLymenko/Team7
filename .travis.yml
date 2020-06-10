@@ -8,6 +8,7 @@ node_js:
 branches:
   only:
     - master
+    - task/inmemory-db
 before_install:
   - cd AdministrationWebApp
 before_script:
