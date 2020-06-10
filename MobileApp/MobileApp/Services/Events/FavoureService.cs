@@ -15,7 +15,7 @@ namespace MobileApp.Services.Events
             prefix = "Event";
         }
 
-        public async Task<int> AddItemAsync(EventResponse item)
+        public async Task<int> AddItemAsync(Event item)
         {
             var result = DependencyService.Get<EventsLiteDBService>().InsertEventToFavoure(item);
 
@@ -29,11 +29,11 @@ namespace MobileApp.Services.Events
             return result;
         } 
 
-        public async Task<IEnumerable<EventResponse>> GetItemsAsync(bool forceRefresh = false)
+        public async Task<IEnumerable<Event>> GetItemsAsync(bool forceRefresh = false)
         {
             var result = DependencyService.Get<EventsLiteDBService>().GetFavoureEvents();
 
-            return result ?? new List<EventResponse>();
+            return result ?? new List<Event>();
         }
     }
 }

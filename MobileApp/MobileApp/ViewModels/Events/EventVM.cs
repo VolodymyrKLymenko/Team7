@@ -7,8 +7,8 @@ namespace MobileApp.ViewModels.Events
 {
     public class EventVM : BaseViewModel
     {
-        private EventResponse _selectedEvent;
-        public EventResponse SelectedEvent
+        private Event _selectedEvent;
+        public Event SelectedEvent
         {
             get
             {
@@ -20,7 +20,7 @@ namespace MobileApp.ViewModels.Events
             }
         }
 
-        public EventVM(EventResponse model)
+        public EventVM(Event model)
         {
             SelectedEvent = model;
 

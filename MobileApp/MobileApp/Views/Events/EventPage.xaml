@@ -65,7 +65,7 @@
                                     <Frame Style="{StaticResource EV_EventInfo}">
                                         <Label IsEnabled="False"
                                            Style="{StaticResource LWhite}"
-                                           Text="{Binding SelectedEvent.StartDate, StringFormat='{0:MMMM dd, yyyy (h:mm tt)}'}"/>
+                                           Text="{Binding SelectedEvent.StartDateTime, StringFormat='{0:MMMM dd, yyyy (h:mm tt)}'}"/>
                                     </Frame>
                                 </StackLayout>
 
@@ -74,7 +74,7 @@
                                     <Frame Style="{StaticResource EV_EventInfo}">
                                         <Label IsEnabled="False"
                                            Style="{StaticResource LWhite}"
-                                           Text="{Binding SelectedEvent.EndDate, StringFormat='{0:MMMM dd, yyyy (h:mm tt)}'}"/>
+                                           Text="{Binding SelectedEvent.FinishDateTime, StringFormat='{0:MMMM dd, yyyy (h:mm tt)}'}"/>
                                     </Frame>
                                 </StackLayout>
 

@@ -10,11 +10,11 @@ namespace MobileApp.Services.LiteDB
     {
         public readonly LiteDatabase dbContext;
 
-        public ILiteCollection<EventResponse> FavoureEvents
+        public ILiteCollection<Event> FavoureEvents
         {
             get
             {
-                return dbContext.GetCollection<EventResponse>("FavoureEvents");
+                return dbContext.GetCollection<Event>("FavoureEvents");
             }
         }
 

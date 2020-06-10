@@ -31,7 +31,7 @@ namespace MobileApp.Views.Events
 
         private async void OnItemSelected(object sender, SelectedItemChangedEventArgs args)
         {
-            var item = args.SelectedItem as EventResponse;
+            var item = args.SelectedItem as Event;
             if (item == null)
                 return;
 
@@ -89,11 +89,11 @@ namespace MobileApp.Views.Events
                 }
                 words = words.Distinct().ToList();
 
-                Dictionary<EventResponse, int> searchRes = new Dictionary<EventResponse, int>();
+                Dictionary<Event, int> searchRes = new Dictionary<Event, int>();
 
                 var all = viewModel.Items;
 
-                IEnumerable<EventResponse> events;
+                IEnumerable<Event> events;
                 foreach (var w in words)
                 {
                     events = all.Where(cust => cust.Title.ToLower().Contains(w)).ToList();

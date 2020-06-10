@@ -17,11 +17,11 @@ namespace MobileApp.ViewModels.Events
         private EventsService eventsService => DependencyService.Get<EventsService>();
         private FavoureService favoureService => DependencyService.Get<FavoureService>();
 
-        public ObservableCollection<EventResponse> Items { get; set; }
+        public ObservableCollection<Event> Items { get; set; }
         public Command LoadItemsCommand { get; set; }
 
-        private EventResponse _SelectedEvent;
-        public EventResponse SelectedEvent
+        private Event _SelectedEvent;
+        public Event SelectedEvent
         {
             get
             {
@@ -37,7 +37,7 @@ namespace MobileApp.ViewModels.Events
         {
             Title = "Events";
 
-            Items = new ObservableCollection<EventResponse>();
+            Items = new ObservableCollection<Event>();
 
             DependencyService.Get<EventsLiteDBService>().RemoveAll();
 
@@ -62,7 +62,7 @@ namespace MobileApp.ViewModels.Events
             {
                 Items.Clear();
 
-                var items = (await eventsService.GetItemsAsync(true)).OrderBy(x => x.StartDate);
+                var items = (await eventsService.GetItemsAsync(true)).OrderBy(x => x.StartDateTime);
                 var favoureItems = await favoureService.GetItemsAsync();
 
 

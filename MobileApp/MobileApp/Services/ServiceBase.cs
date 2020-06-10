@@ -17,7 +17,7 @@ namespace MobileApp.Services
 		protected LiteDBService liteContext => LiteDBSingleton.Get();
 		protected HttpClientHandler handler => HttpSingleton.GetHandler();
 
-		protected static List<EventResponse> favoureEvents;
+		protected static List<Event> favoureEvents;
 
 		private string _prefix;
 		protected string prefix
