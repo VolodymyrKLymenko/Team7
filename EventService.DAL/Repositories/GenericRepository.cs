@@ -41,10 +41,12 @@ namespace EventService.DAL.Repositories
             return item;
         }
 
-        public void Update(TEntity item)
+        public TEntity Update(TEntity item)
         {
             context.Entry(item).State = EntityState.Modified;
             context.SaveChanges();
+
+            return item;
         }
 
         public void Remove(TEntity item)

@@ -28,10 +28,13 @@ export class EventService {
   }
 
   public createEvent(request: CreateEventModel): Observable<EventModel> {
+    request.facultyId = 1;
+    request.eventStatusId = 1;
+
     return this.http.post<EventModel>(ApiRoutes.events, request);
   }
 
-  public updateEvent(eventId: number, request: UpdateEventModel): Observable<EventModel> {
-    return this.http.put<EventModel>(`${ApiRoutes.events}/${eventId}`, request);
+  public updateEvent(request: UpdateEventModel): Observable<EventModel> {
+    return this.http.put<EventModel>(`${ApiRoutes.events}`, request);
   }
 }

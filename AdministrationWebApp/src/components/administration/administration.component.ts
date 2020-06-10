@@ -9,6 +9,7 @@ import { UpdateEventModel } from 'src/core/services/events/update-event';
 import { CreateEventModel } from 'src/core/services/events/create-event';
 import { FormValidationService } from 'src/core/services/validation/validation.service';
 import { ValidationMessages } from 'src/core/utils/common-constants';
+import { FacultyModel } from 'src/core/models/faculty';
 
 @Component({
   selector: 'app-admin',
@@ -27,6 +28,12 @@ export class AdministrationComponent implements OnInit, AfterViewInit {
   public editingEventId = -1;
   public editingEventIndex = -1;
   public eventToCreate: CreateEventModel;
+
+  public faculties: FacultyModel[] = [
+    { id: 1, name: "Applied Mathematic" } as FacultyModel,
+    { id: 2, name: "Physician faculty" } as FacultyModel,
+    { id: 3, name: "Biological faculty" } as FacultyModel
+  ]
 
   private eventTitleToEdit: string;
   private eventSupportToEdit: string;
@@ -48,7 +55,7 @@ export class AdministrationComponent implements OnInit, AfterViewInit {
   }
 
   private updateEvents(): void {
-    this.eventService.getForUser()
+    this.eventService.getAll()
       .subscribe(res => {
         this.events = res;
       });
@@ -75,11 +82,13 @@ export class AdministrationComponent implements OnInit, AfterViewInit {
     this.eventSupportToEdit = event.supportPhone;
 
     this.eventToUpdate = {
-      eventId: event.id,
+      id: event.id,
       description: event.description,
       location: event.location,
-      startDate: event.startDate,
-      endDate: event.endDate
+      startDate: event.startDateTime,
+      endDate: event.finishDateTime,
+      facultyId: event.facultyId,
+      eventStatusId: event.eventStatusId
     } as UpdateEventModel;
 
     this.createEditForm();
@@ -88,8 +97,8 @@ export class AdministrationComponent implements OnInit, AfterViewInit {
 
   public createEvent(): void {
     this.eventToCreate = {
-      startDate: new Date(Date.now()),
-      endDate: new Date(Date.now())
+      startDateTime: new Date(Date.now()),
+      finishDateTime: new Date(Date.now())
     } as CreateEventModel;
 
     this.createNewEventForm();
@@ -110,8 +119,12 @@ export class AdministrationComponent implements OnInit, AfterViewInit {
         this.eventToUpdate.location = this.actionForm.controls['location'].value;
         this.eventToUpdate.startDate = this.actionForm.controls['startDate'].value;
         this.eventToUpdate.endDate = this.actionForm.controls['endDate'].value;
+        this.eventToUpdate.faculty = this.actionForm.controls['faculty'].value;
+        this.eventToUpdate.facultyId = this.actionForm.controls['faculty'].value.id;
 
-        this.eventService.updateEvent(this.editingEventId, this.eventToUpdate)
+        console.log('eventtttttttt ', this.eventToUpdate)
+
+        this.eventService.updateEvent(this.eventToUpdate)
           .subscribe(res => {
             this.events.splice(this.editingEventIndex, 1, res);
           });
@@ -120,9 +133,12 @@ export class AdministrationComponent implements OnInit, AfterViewInit {
         this.eventToCreate.title = this.actionForm.controls['title'].value;
         this.eventToCreate.description = this.actionForm.controls['description'].value;
         this.eventToCreate.location = this.actionForm.controls['location'].value;
-        this.eventToCreate.startDate = this.actionForm.controls['startDate'].value;
-        this.eventToCreate.endDate = this.actionForm.controls['endDate'].value;
+        this.eventToCreate.startDateTime = this.actionForm.controls['startDate'].value;
+        this.eventToCreate.finishDateTime = this.actionForm.controls['endDate'].value;
+        this.eventToCreate.faculty = this.actionForm.controls['faculty'].value;
+        this.eventToCreate.facultyId = this.actionForm.controls['faculty'].value.id;
 
+        console.log('eventtttttttt ', this.eventToCreate)
         this.eventService.createEvent(this.eventToCreate)
           .subscribe(res => {
             this.events.splice(0, 0, res);
@@ -139,6 +155,7 @@ export class AdministrationComponent implements OnInit, AfterViewInit {
   private createEditForm(): void {
     this.actionForm = new FormGroup({
       title: new FormControl(this.eventTitleToEdit, []),
+      faculty: new FormControl(this.eventToUpdate.faculty, []),
       description: new FormControl(this.eventToUpdate.description, [Validators.required]),
       location: new FormControl(this.eventToUpdate.location, [Validators.required]),
       startDate: new FormControl(new Date(this.eventToUpdate.startDate), [Validators.required]),
@@ -153,10 +170,11 @@ export class AdministrationComponent implements OnInit, AfterViewInit {
   private createNewEventForm(): void {
     this.actionForm = new FormGroup({
       title: new FormControl(this.eventToCreate.title, [Validators.required]),
+      faculty: new FormControl(this.eventToCreate.faculty, []),
       description: new FormControl(this.eventToCreate.description, [Validators.required]),
       location: new FormControl(this.eventToCreate.location, [Validators.required]),
-      startDate: new FormControl(new Date(this.eventToCreate.startDate), [Validators.required]),
-      endDate: new FormControl(new Date(this.eventToCreate.endDate), [Validators.required]),
+      startDate: new FormControl(new Date(this.eventToCreate.startDateTime), [Validators.required]),
+      endDate: new FormControl(new Date(this.eventToCreate.finishDateTime), [Validators.required]),
       support: new FormControl(this.eventSupportToEdit, [])
     });
 

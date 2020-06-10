@@ -21,7 +21,7 @@
 </ng-template>
 
 <ng-template let-data="data" #startDateColumn>
-  <span> {{data.startDate | date:"MM.dd.yy 'at' hh:mm"}}</span>
+  <span> {{data.startDateTime | date:"MM.dd.yy 'at' hh:mm"}}</span>
 </ng-template>
 
 
@@ -77,13 +77,22 @@
           </div>
         </label>
       </div>
+      <div class="form-label-group">
+        <hr/>
+        <label>
+            Organized faculty:
+        </label>
+        <p-dropdown [options]="faculties" optionLabel="name" formControlName="faculty"></p-dropdown>
+        <hr/>
+      </div>
       <div class="form-label-group"
            [class.form-label-failed-group]="submitTouched && formErrors.startDate">
         <label>
             Starting at:
           <p-calendar formControlName="startDate"
                       showTime="true"
-                      hourFormat="24">
+                      hourFormat="24"
+                      inputStyleClass="position: fixed;">
           </p-calendar>
           <div *ngIf="submitTouched && formErrors.startDate" class="validation-error-text">
             {{formErrors.startDate}}

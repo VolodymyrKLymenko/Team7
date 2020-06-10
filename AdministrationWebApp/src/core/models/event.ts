@@ -3,9 +3,11 @@ export class EventModel {
     title: string;
     description: string;
     location: string;
-    startDate: Date;
-    endDate: Date;
-    organizedUniversity: string;
+    startDateTime: Date;
+    finishDateTime: Date;
+    facultyName: string;
     supportPhone: string;
     status: string;
+    eventStatusId: number;
+    facultyId: number;
 }

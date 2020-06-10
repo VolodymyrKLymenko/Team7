@@ -5,11 +5,10 @@
                 <img src="Card" src="assets/images/usercard.png">
             </p-header>
             <div class="event-body">
-                <p>Details </p>
-                    University: {{event.organizedUniversity}}<br>
-                    Location: {{event.location}}<br>
-                    Starting: {{event.startDate}}<br>
-                    Ending: {{event.endDate}}<br>
+                University: {{event.facultyName}}<br>
+                Location: {{event.location}}<br>
+                Starting: {{event.startDateTime | date:"MM.dd.yy 'at' hh:mm"}}<br>
+                Ending: {{event.finishDateTime | date:"MM.dd.yy 'at' hh:mm"}}<br>
             </div>
             <p-footer>
                 Contact phone number: {{event.supportPhone}}

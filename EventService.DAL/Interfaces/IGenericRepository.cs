@@ -13,7 +13,7 @@ namespace EventService.DAL.Interfaces
         IEnumerable<TEntity> Get(Func<TEntity, bool> predicate);
         void Remove(TEntity item);
         void Remove(int id);
-        void Update(TEntity item);
+        TEntity Update(TEntity item);
         IEnumerable<TEntity> GetWithInclude(params Expression<Func<TEntity, object>>[] includeProperties);
         IEnumerable<TEntity> GetWithInclude(Func<TEntity, bool> predicate,
             params Expression<Func<TEntity, object>>[] includeProperties);

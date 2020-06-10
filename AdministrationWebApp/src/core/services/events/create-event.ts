@@ -1,7 +1,12 @@
+import { FacultyModel } from 'src/core/models/faculty';
+
 export class CreateEventModel {
     title: string;
     description: string;
-    startDate: Date;
-    endDate: Date;
+    startDateTime: Date;
+    finishDateTime: Date;
     location: string;
+    facultyId: number;
+    eventStatusId: number;
+    faculty: FacultyModel;
 }

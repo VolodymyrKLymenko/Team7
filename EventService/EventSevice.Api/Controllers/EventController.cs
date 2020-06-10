@@ -28,7 +28,7 @@ namespace EventSevice.Api.Controllers
             eventService.Create(eventDto);
 
         [HttpPut]
-        public void UpdateEvent(EventDto eventDto) =>
+        public EventDto UpdateEvent(EventDto eventDto) =>
             eventService.Update(eventDto);
     }
 }

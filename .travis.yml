@@ -1,4 +1,3 @@
-
 sudo: required
 addons:
   chrome: stable
@@ -17,7 +16,7 @@ before_script:
 script:
   - npm install
   - ng lint
-  - ng build --prod
+  - ng build --prod --aot
 deploy:
   skip_cleanup: true
   provider: firebase
