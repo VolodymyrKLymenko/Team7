@@ -30,10 +30,10 @@ export class AdministrationComponent implements OnInit, AfterViewInit {
   public eventToCreate: CreateEventModel;
 
   public faculties: FacultyModel[] = [
-    { id: 1, name: "Applied Mathematic" } as FacultyModel,
-    { id: 2, name: "Physician faculty" } as FacultyModel,
-    { id: 3, name: "Biological faculty" } as FacultyModel
-  ]
+    { id: 1, name: 'Applied Mathematic' } as FacultyModel,
+    { id: 2, name: 'Physician faculty' } as FacultyModel,
+    { id: 3, name: 'Biological faculty' } as FacultyModel
+  ];
 
   private eventTitleToEdit: string;
   private eventSupportToEdit: string;
@@ -122,8 +122,6 @@ export class AdministrationComponent implements OnInit, AfterViewInit {
         this.eventToUpdate.faculty = this.actionForm.controls['faculty'].value;
         this.eventToUpdate.facultyId = this.actionForm.controls['faculty'].value.id;
 
-        console.log('eventtttttttt ', this.eventToUpdate)
-
         this.eventService.updateEvent(this.eventToUpdate)
           .subscribe(res => {
             this.events.splice(this.editingEventIndex, 1, res);
@@ -138,7 +136,6 @@ export class AdministrationComponent implements OnInit, AfterViewInit {
         this.eventToCreate.faculty = this.actionForm.controls['faculty'].value;
         this.eventToCreate.facultyId = this.actionForm.controls['faculty'].value.id;
 
-        console.log('eventtttttttt ', this.eventToCreate)
         this.eventService.createEvent(this.eventToCreate)
           .subscribe(res => {
             this.events.splice(0, 0, res);
