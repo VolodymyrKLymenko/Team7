@@ -24,7 +24,7 @@ namespace EventSevice.Api.Controllers
             eventService.GetAll();
 
         [HttpPost]
-        public void Create(EventDto eventDto) =>
+        public EventDto Create(EventDto eventDto) =>
             eventService.Create(eventDto);
 
         [HttpPut]

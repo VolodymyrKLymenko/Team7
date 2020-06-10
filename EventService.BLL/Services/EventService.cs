@@ -19,8 +19,8 @@ namespace EventService.BLL.Services
             this.mapper = mapper;
         }
 
-        public void Create(EventDto eventDto) =>
-            events.Create(mapper.Map<Event>(eventDto));
+        public EventDto Create(EventDto eventDto) =>
+            mapper.Map<EventDto>(events.Create(mapper.Map<Event>(eventDto)));
 
         public void Update(EventDto eventDto) =>
             events.Update(mapper.Map<Event>(eventDto));
@@ -29,6 +29,6 @@ namespace EventService.BLL.Services
             events.Remove(eventId);
 
         public IEnumerable<EventDto> GetAll() =>
-            events.Get().Select(x => mapper.Map<EventDto>(x)).ToArray();
+            events.GetWithInclude(e => e.Faculty).Select(x => mapper.Map<EventDto>(x)).ToArray();
     }
 }

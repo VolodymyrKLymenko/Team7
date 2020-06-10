@@ -33,10 +33,12 @@ namespace EventService.DAL.Repositories
             return dbSet.Find(id);
         }
 
-        public void Create(TEntity item)
+        public TEntity Create(TEntity item)
         {
             dbSet.Add(item);
             context.SaveChanges();
+
+            return item;
         }
 
         public void Update(TEntity item)

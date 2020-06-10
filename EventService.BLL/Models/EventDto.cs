@@ -13,5 +13,7 @@ namespace EventService.BLL.Models
         public DateTime FinishDateTime { get; set; }
         public int EventStatusId { get; set; }
         public int FacultyId { get; set; }
+        public string FacultyName { get; set; }
+        public string SupportPhone { get; set; }
     }
 }

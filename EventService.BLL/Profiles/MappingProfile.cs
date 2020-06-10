@@ -8,7 +8,9 @@ namespace EventService.BLL.Profiles
     {
         public MappingProfile()
         {
-            CreateMap<Event, EventDto>();
+            CreateMap<Event, EventDto>()
+                .ForMember(eDto => eDto.FacultyName, options => options.MapFrom(e => e.Faculty.Name))
+                .ForMember(eDto => eDto.SupportPhone, options => options.MapFrom(e => e.Faculty.PhoneNumber));
             CreateMap<EventDto, Event>();
         }
     }

@@ -2,6 +2,7 @@ using AutoMapper;
 using EventService.BLL.Interfaces;
 using EventService.BLL.Profiles;
 using EventService.DAL.Context;
+using EventService.DAL.Entities;
 using EventService.DAL.Interfaces;
 using EventService.DAL.Repositories;
 using Microsoft.AspNetCore.Builder;
@@ -30,7 +31,7 @@ namespace EventSevice.Api
         {
             services.AddControllers();
 
-            services.AddDbContext<ApplicationContext>(opts => opts.UseSqlServer(@"Data Source=.\SQLEXPRESS;Initial Catalog=EventAppDb;Integrated Security=True"));
+            services.AddDbContext<ApplicationContext>(opts => opts.UseInMemoryDatabase("EventDb"));
 
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 
