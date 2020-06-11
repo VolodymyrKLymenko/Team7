@@ -19,5 +19,6 @@ script:
   - ng lint
   - ng build --prod --aot
 after_success:
+  - firebase login
   - firebase use default
-  - firebase deploy --token 1/gZZjbfzz7vjcb8vgm8pUqz1nOXeDasBcT_NsxDsnQBU
+  - firebase deploy --token $FIREBASE_TOKEN
