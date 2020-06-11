@@ -18,8 +18,6 @@ script:
   - npm install
   - ng lint
   - ng build --prod --aot
-deploy:
-  skip_cleanup: true
-  provider: firebase
-  token:
-    secure: $FIREBASE_TOKEN
+after_success:
+  - firebase use default
+  - firebase deploy --token 1/gZZjbfzz7vjcb8vgm8pUqz1nOXeDasBcT_NsxDsnQBU

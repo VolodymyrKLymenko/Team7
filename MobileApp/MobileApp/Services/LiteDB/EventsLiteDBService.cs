@@ -10,7 +10,7 @@ namespace MobileApp.Services.LiteDB
 {
     class EventsLiteDBService : ServiceBase
     {
-        public int InsertEventToFavoure(EventResponse _event)
+        public int InsertEventToFavoure(Event _event)
         {
             var collection = liteContext.FavoureEvents;
 
@@ -28,7 +28,7 @@ namespace MobileApp.Services.LiteDB
             return result;
         }
 
-        public IEnumerable<EventResponse> GetFavoureEvents()
+        public IEnumerable<Event> GetFavoureEvents()
         {
             var collection = liteContext.FavoureEvents;
 

@@ -26,11 +26,11 @@ namespace MobileApp.ViewModels.Favoure
         private FavoureService favoureService => DependencyService.Get<FavoureService>();
 
         public ObservableCollection<SpecialDate> special { get; set; }
-        public ObservableCollection<EventResponse> CurrentEvents { get; set; }
-        public ObservableCollection<EventResponse> Events { get; set; }
+        public ObservableCollection<Event> CurrentEvents { get; set; }
+        public ObservableCollection<Event> Events { get; set; }
 
-        private EventResponse _SelectedEvent;
-        public EventResponse SelectedEvent
+        private Event _SelectedEvent;
+        public Event SelectedEvent
         {
             get
             {
@@ -60,8 +60,8 @@ namespace MobileApp.ViewModels.Favoure
 
         private void FilterEventsByDate()
         {
-            var filteredEvents = Events.Where(t => t.StartDate.Date <= selDate.Date && t.EndDate.Date >= selDate.Date);
-            filteredEvents.OrderBy(t => t.StartDate.Date);
+            var filteredEvents = Events.Where(t => t.StartDateTime.Date <= selDate.Date && t.FinishDateTime.Date >= selDate.Date);
+            filteredEvents.OrderBy(t => t.StartDateTime.Date);
 
             CurrentEvents.Clear();
             foreach (var i in filteredEvents)
@@ -73,8 +73,8 @@ namespace MobileApp.ViewModels.Favoure
         public FavoureViewModel()
         {
             special = new ObservableCollection<SpecialDate>();
-            CurrentEvents = new ObservableCollection<EventResponse>();
-            Events = new ObservableCollection<EventResponse>();
+            CurrentEvents = new ObservableCollection<Event>();
+            Events = new ObservableCollection<Event>();
             SelectedEvent = null;
 
             LoadEventsCommand = new Command(async () => await ExecuteLoadEventsCommand());
@@ -94,13 +94,13 @@ namespace MobileApp.ViewModels.Favoure
                 Events.Clear();
                 var items = await favoureService.GetItemsAsync(true);
 
-                items.OrderBy(t => t.StartDate.Date);
+                items.OrderBy(t => t.StartDateTime.Date);
                 foreach (var item in items)
                 {
-                    if (special.FirstOrDefault(d => d.Date == item.StartDate) == null)
+                    if (special.FirstOrDefault(d => d.Date == item.StartDateTime) == null)
                     {
-                        special.Add(new DefSpecial(item.StartDate));
-                        selDate = item.StartDate;
+                        special.Add(new DefSpecial(item.StartDateTime));
+                        selDate = item.StartDateTime;
                     }
                     Events.Add(item);
                 }

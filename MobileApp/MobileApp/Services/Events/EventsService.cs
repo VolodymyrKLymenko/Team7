@@ -13,19 +13,19 @@ namespace MobileApp.Services.Events
             prefix = "events";
         }
 
-        public async Task<IEnumerable<EventResponse>> GetItemsAsync(bool forceRefresh = false)
+        public async Task<IEnumerable<Event>> GetItemsAsync(bool forceRefresh = false)
         {
             var json = await Get("");
 
             if (!string.IsNullOrEmpty(json))
             {
-                var result = Deserialize<IEnumerable<EventResponse>>(json);
+                var result = Deserialize<IEnumerable<Event>>(json);
 
                 return result;
             }
             else
             {
-                return new List<EventResponse>();
+                return new List<Event>();
             }
         }
     }
