@@ -30,5 +30,9 @@ namespace EventSevice.Api.Controllers
         [HttpPut]
         public void UpdateEvent(EventDto eventDto) =>
             eventService.Update(eventDto);
+
+        [HttpDelete]
+        public void DeleteEvent(int id) =>
+            eventService.Remove(id);
     }
 }

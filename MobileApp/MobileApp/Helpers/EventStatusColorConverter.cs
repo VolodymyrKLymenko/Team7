@@ -10,13 +10,14 @@ namespace MobileApp.Helpers
     {
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
-            switch ((EventStatus)value)
+            var status = (EventStatus)value;
+            switch (status.Id)
             {
-                case EventStatus.Finished:
+                case 2:
                     return Color.FromHex("#6eeb3d");
-                case EventStatus.Pending:
+                case 1:
                     return Color.FromHex("#EBCE3D");
-                case EventStatus.Cancelled:
+                case 3:
                     return Color.FromHex("#FF0A0A");
             }
 
