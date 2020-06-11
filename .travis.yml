@@ -20,4 +20,4 @@ script:
   - ng build --prod --aot
 after_success:
   - firebase use default
-  - firebase deploy --token $FIREBASE_TOKEN
+  - firebase deploy --token AIzaSyAvG0LRS5CCBcOe8K-fteX_h2t8E8rJa4E
